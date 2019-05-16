@@ -6,22 +6,12 @@ const UserSchema = new mongoose.Schema({
     postDetails: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'PostDetails'
-    }],
-    orders: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Records'
     }]
 })
 
-UserSchema.methods.postDetails = function(postDetails) {
-    this.userDetails.push(postDetails);
+UserSchema.methods.addPostDetails = function(id) {
+    this.userDetails.push(id);
     return this.save()
 }
-
-UserSchema.methods.addOrders = function(order) {
-    this.orders.push(order);
-    return this.save()
-}
-
 
 module.export = mongoose.model('User', UserSchema);

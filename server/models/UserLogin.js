@@ -9,4 +9,9 @@ const UserLoginSchema = new mongoose.Schema({
     }
 })
 
+UserLoginSchema.methods.addInfo = function(id) {
+    this.info = id;
+    return this.save();
+}
+
 module.export = mongoose.model('UserLogin', UserLoginSchema);
