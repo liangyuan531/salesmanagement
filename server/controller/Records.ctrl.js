@@ -15,6 +15,7 @@ const crateNewRecords = (data, user, record, postDetail, res) => {
             salePrice: data.salePrice[i],
             amount: data.amount[i],
         })
+        item.save();
         postDetail.addItem(mongoose.Types.ObjectId(item._id));
         // add items to record
         record.addItem(mongoose.Types.ObjectId(item._id));
@@ -81,10 +82,22 @@ module.exports = {
 
     updateRecord: (req, res) => {
         console.log(req.params.id);
+        console.log(req.body);
+        let recordId = mongoose.Types.ObjectId(req.params.id);
+        Records.findById(recordId)
     },
 
     deleteRecord: (req, res) => {
         console.log(req.params.id);
+        // delete record items
+        Records.findById(recordId)
+            .exec((err, record) => {
+                console.log('delete record: ', record);
+                Item.findByIdAndRemove(record.items.map(item => item._id));
+            })
+            .populate('items')
+        // delele record
+        Records.findByIdAndRemove(recordId)
     },
     /** 
      * users view their own orders
