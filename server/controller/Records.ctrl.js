@@ -6,7 +6,6 @@ const Item = require('../models/Item')
 const validateInput = require('../validation/order.validation')
 
 const crateNewRecords = (data, user, record, postDetail, res) => {
-    user.addPostDetails(mongoose.Types.ObjectId(postDetail._id));
     // add purchased items to post detail
     for(let i=0;i<data.itemName.length;i++){
         const item = new Item({
@@ -20,6 +19,7 @@ const crateNewRecords = (data, user, record, postDetail, res) => {
         // add items to record
         record.addItem(mongoose.Types.ObjectId(item._id));
     }
+    user.addPostDetails(mongoose.Types.ObjectId(postDetail._id));
     // add user to record
     record.applyUser(mongoose.Types.ObjectId(user._id));
     return res.send(record);
@@ -28,11 +28,14 @@ const crateNewRecords = (data, user, record, postDetail, res) => {
 module.exports = {
     getAllRecords: (req, res) => {
         console.log(req.body);
-        Records.find({}, function(err, records) {
-            console.log('records: ', records);
-            if(err) res.send('cannot find records');
-            res.send(records);
-        })
+        Records.find({})
+                .populate({path: 'user', populate: {path: 'postDetails'}})
+                .populate('items')
+                .exec(function(err, records) {
+                    console.log('records: ', records);
+                    if(err) res.send('cannot find records');
+                    res.send(records);
+                });
     },
 
     addRecord: (req, res) => {
@@ -40,7 +43,7 @@ module.exports = {
         // here, data should have 3 parts infomation:
         // 1. user (username, isVip)
         // 2. post details (receiver, phone number, address)
-        // 3. record's items (itemName, price, amount, date)
+        // 3. record's items (itemName, price, amount)
         let data = req.body;
         //let {orderErr, isValid} = validateInput(data);
 
@@ -54,6 +57,7 @@ module.exports = {
             address: data.address
         })
         postDetail.save();
+
         const record = new Records({
             date: new Date()
         })
@@ -95,7 +99,7 @@ module.exports = {
                 console.log('delete record: ', record);
                 Item.findByIdAndRemove(record.items.map(item => item._id));
             })
-            .populate('items')
+            //.populate('items')
         // delele record
         Records.findByIdAndRemove(recordId)
     },
