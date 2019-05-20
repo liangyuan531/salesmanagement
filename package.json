@@ -1,51 +1,51 @@
 {
-    "name": "shopping-cart",
-    "version": "1.0.0",
-    "description": "shopping cart",
-    "scripts": {
-      "start": "react-scripts start",
-      "build": "react-scripts build",
-      "test": "react-scripts test",
-      "eject": "react-scripts eject",
-      "server": "nodemon server/server.js",
-      "dev": "nodeidon -d \"node server/server.js\" \"npm run start\"",
-      "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
-    },
-    "author": "Liang",
-    "license": "ISC",
-    "dependencies": {
-      "axios": "^0.18.0",
-      "bcryptjs": "^2.4.3",
-      "classnames": "^2.2.6",
-      "cloudinary": "^1.14.0",
-      "concurrently": "^3.6.0",
-      "connect-multiparty": "^2.2.0",
-      "cors": "^2.8.5",
-      "express": "^4.16.4",
-      "jsonwebtoken": "^8.5.1",
-      "jwt-decode": "^2.2.0",
-      "mongodb": "^3.2.3",
-      "mongoose": "^5.5.4",
-      "passport": "^0.4.0",
-      "passport-jwt": "^4.0.0",
-      "react": "^16.6.3",
-      "react-dom": "^16.6.3",
-      "react-modal": "^3.8.1",
-      "react-redux": "^7.0.3",
-      "react-router-dom": "^4.3.1",
-      "react-scripts": "^2.1.8",
-      "redux": "^4.0.1",
-      "redux-devtools-extension": "^2.13.8",
-      "redux-thunk": "^2.3.0",
-      "validator": "^10.11.0"
-    },
-    "devDependencies": {
-      "nodemon": "^1.18.7"
-    },
-    "browserslist": [
-      ">0.2%",
-      "not dead",
-      "not ie <= 11",
-      "not op_mini all"
-    ]
-  }
+  "name": "sale-management",
+  "version": "1.0.0",
+  "description": "sales management",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "server": "nodemon server/server.js",
+    "dev": "nodeidon -d \"node server/server.js\" \"npm run start\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
+  },
+  "author": "Liang",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "classnames": "^2.2.6",
+    "cloudinary": "^1.14.0",
+    "concurrently": "^3.6.0",
+    "connect-multiparty": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^2.2.0",
+    "mongodb": "^3.2.3",
+    "mongoose": "^5.5.4",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-modal": "^3.8.1",
+    "react-redux": "^7.0.3",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.8",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

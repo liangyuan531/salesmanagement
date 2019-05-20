@@ -1,6 +1,6 @@
 const recordsController = require('../controller/Records.ctrl')
 
-module.export = (router) => {
+module.exports = (router) => {
     router.route('/records/admin').get(recordsController.getAllRecords),
     router.route('/records/add').post(recordsController.addRecord),
     router.route('/records/:id').put(recordsController.updateRecord),

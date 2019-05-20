@@ -1,5 +1,5 @@
 const record = require('./records.route')
 
-module.export = (router) => {
+module.exports = (router) => {
     record(router)
 }
