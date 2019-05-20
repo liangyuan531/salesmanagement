@@ -95,13 +95,18 @@ module.exports = {
         console.log(req.params.id);
         // delete record items
         Records.findById(recordId)
-            .exec((err, record) => {
-                console.log('delete record: ', record);
-                Item.findByIdAndRemove(record.items.map(item => item._id));
-            })
-            //.populate('items')
+                .populate('items')
+                .exec((err, record) => {
+                    console.log('delete record: ', record);
+                    record.items.map(item => {
+                        Item.findByIdAndRemove(item._id);
+                    })
+                })
         // delele record
-        Records.findByIdAndRemove(recordId)
+        Records.findByIdAndRemove(recordId, err => {
+            if(err) res.json({'message': '0'});
+            res.json({'message': '1'})
+        });
     },
     /** 
      * users view their own orders
