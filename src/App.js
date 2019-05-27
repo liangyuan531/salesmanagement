@@ -7,24 +7,30 @@ import Records from './components/Records'
 import Report from './components/Report'
 import Error404 from './components/Error'
 
-import './App.css';
+import './App.css'
+import './stylesheets/home.css'
 
 function App() {
   return (
     <div className="App">
       <Switch>
-        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
           <TopBar />
         </nav>
-        <nav className="col-md-2 d-none d-md-block bg-light sidebar">
-          <Navigator />
-        </nav>
-        <main>
-          <Route path="/" exact component={Home}/>
-          <Route path="/record" component={Records}/>
-          <Route path="/report" component={Report}/>
-          <Route component={Error404}/>
-        </main>
+        <div className="container-fluid">
+          <div className="row">
+            <nav className="col-md-2 d-none d-md-block bg-light sidebar">
+            <Navigator />
+            </nav>
+            <main className="col-md-9 ml-sm-auto col-lg-10 px-4">
+              <Route path="/" exact component={Home}/>
+              <Route path="/record" component={Records}/>
+              <Route path="/report" component={Report}/>
+              <Route component={Error404}/>
+            </main>
+          </div>
+        </div>
+        
       </Switch>
     </div>
   );
