@@ -13,25 +13,26 @@ import './stylesheets/home.css'
 function App() {
   return (
     <div className="App">
+      <Router>
       <Switch>
-        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-          <TopBar />
-        </nav>
-        <div className="container-fluid">
+        <div>
+          <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+            <TopBar />
+          </nav>
           <div className="row">
             <nav className="col-md-2 d-none d-md-block bg-light sidebar">
-            <Navigator />
+              <Navigator />
             </nav>
             <main className="col-md-9 ml-sm-auto col-lg-10 px-4">
               <Route path="/" exact component={Home}/>
-              <Route path="/record" component={Records}/>
+              <Route path="/records" component={Records}/>
               <Route path="/report" component={Report}/>
               <Route component={Error404}/>
             </main>
           </div>
         </div>
-        
       </Switch>
+      </Router>
     </div>
   );
 }
