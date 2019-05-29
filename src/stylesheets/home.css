@@ -26,3 +26,22 @@
 main {
     margin-top: 50px;
 }
+
+.sidebar-sticky {
+    position: sticky;
+    top: 0;
+    padding-top: .5rem;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+

@@ -19,16 +19,18 @@ function App() {
           <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
             <TopBar />
           </nav>
-          <div className="row">
-            <nav className="col-md-2 d-none d-md-block bg-light sidebar">
-              <Navigator />
-            </nav>
-            <main className="col-md-9 ml-sm-auto col-lg-10 px-4">
-              <Route path="/" exact component={Home}/>
-              <Route path="/records" component={Records}/>
-              <Route path="/report" component={Report}/>
-              <Route component={Error404}/>
-            </main>
+          <div class="container-fluid">
+            <div className="row">
+              <nav className="col-md-2 d-none d-md-block bg-light sidebar">
+                <Navigator />
+              </nav>
+              <main className="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <Route path="/" exact component={Home}/>
+                <Route path="/records" component={Records}/>
+                <Route path="/report" component={Report}/>
+                <Route component={Error404}/>
+              </main>
+            </div>
           </div>
         </div>
       </Switch>
