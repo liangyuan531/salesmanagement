@@ -7,34 +7,39 @@ import Records from './components/Records'
 import Report from './components/Report'
 import Error404 from './components/Error'
 
+import store from './redux/store'
+import { Provider } from 'react-redux'
+
 import './App.css'
 import './stylesheets/home.css'
 
 function App() {
   return (
     <div className="App">
-      <Router>
-      <Switch>
-        <div>
-          <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-            <TopBar />
-          </nav>
-          <div class="container-fluid">
-            <div className="row">
-              <nav className="col-md-2 d-none d-md-block bg-light sidebar">
-                <Navigator />
-              </nav>
-              <main className="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <Route path="/" exact component={Home}/>
-                <Route path="/records" component={Records}/>
-                <Route path="/report" component={Report}/>
-                <Route component={Error404}/>
-              </main>
+      <Provider store={store}>
+        <Router>
+          <div>
+            <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+              <TopBar />
+            </nav>
+            <div class="container-fluid">
+              <div className="row">
+                <nav className="col-md-2 d-none d-md-block bg-light sidebar">
+                  <Navigator />
+                </nav>
+                <main className="col-md-9 ml-sm-auto col-lg-10 px-4">
+                  <Switch>
+                    <Route path="/" exact component={Home}/>
+                    <Route path="/records" component={Records}/>
+                    <Route path="/report" component={Report}/>
+                    <Route component={Error404}/>
+                  </Switch>
+                </main>
+              </div>
             </div>
           </div>
-        </div>
-      </Switch>
-      </Router>
+        </Router>
+      </Provider>
     </div>
   );
 }

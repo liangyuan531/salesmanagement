@@ -45,3 +45,8 @@ main {
     flex-direction: column !important;
 }
 
+.nav-item {
+    display: block;
+    padding: .5rem 1rem;
+}
+
