@@ -3,6 +3,8 @@ import React from 'react';
 class RecordsTable extends React.Component {
     render() {
         const records = this.props.records;
+        console.log("records",records);
+        
         return(
             <div>
                 <table class="table">
@@ -21,14 +23,14 @@ class RecordsTable extends React.Component {
                       </tr>
                     </thead>
                   <tbody>
-                    {records.map((record, index) => {
+                    {/* {records.map((record, index) => {
                         <tr>
                             <th scope="row">index</th>
                             <td>Mark</td>
                             <td>Otto</td>
                             <td>@mdo</td>
                         </tr>
-                    })}
+                    })} */}
                   </tbody>
                 </table>
             </div>

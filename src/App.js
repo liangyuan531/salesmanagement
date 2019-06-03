@@ -11,7 +11,7 @@ import store from './redux/store'
 import { Provider } from 'react-redux'
 
 import './App.css'
-import './stylesheets/home.css'
+import './stylesheets/style.css'
 
 function App() {
   return (

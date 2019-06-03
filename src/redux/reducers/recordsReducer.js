@@ -1,7 +1,7 @@
 import { GET_ALL_RECORDS } from '../actions/actionType'
 
 const initialState = {
-    records = []
+    records: []
 }
 
 export default function(state = initialState, action) {
