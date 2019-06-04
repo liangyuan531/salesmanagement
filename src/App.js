@@ -6,6 +6,7 @@ import Home from './components/Home'
 import Records from './components/Records'
 import Report from './components/Report'
 import Error404 from './components/Error'
+import AddRecord from './components/AddRecord'
 
 import store from './redux/store'
 import { Provider } from 'react-redux'
@@ -32,6 +33,7 @@ function App() {
                     <Route path="/" exact component={Home}/>
                     <Route path="/records" component={Records}/>
                     <Route path="/report" component={Report}/>
+                    <Route path="/addRecord" component={AddRecord} />
                     <Route component={Error404}/>
                   </Switch>
                 </main>

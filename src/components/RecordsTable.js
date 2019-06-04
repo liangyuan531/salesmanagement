@@ -1,16 +1,37 @@
-import React from 'react';
+import React from 'react'
+import { Redirect } from 'react-router-dom'
+import AddRecord from './AddRecord'
 
 class RecordsTable extends React.Component {
+    constructor(props) {
+        super(porps);
+        this.state = {
+            toAddPage: false
+        }
+    }
+
+    addRecord = () => {
+        this.setState({
+            toAddPage: true
+        })
+    }
+
     render() {
         const records = this.props.records;
         console.log("records",records);
-        
+        if(this.state.toAddPage === true) {
+            return <Redirect to='/addRecord' />
+        }
         return(
-            <div>
+            <>
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-primary">Delete</button>
+                  <button type="button" class="btn btn-primary" onClick={this.addRecord}>Add</button>
+                </div>
                 <table class="table">
                   <thead>
                       <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
                         <th scope="col">Name</th>
                         <th scope="col">Receiver</th>
                         <th scope="col">Items</th>
@@ -33,7 +54,7 @@ class RecordsTable extends React.Component {
                     })} */}
                   </tbody>
                 </table>
-            </div>
+            </>
         )
     }
 }
