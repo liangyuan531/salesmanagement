@@ -53,7 +53,7 @@ module.exports = {
         // }
         const postDetail = new PostDetails({
             receiver: data.receiver,
-            phoneNo: data.phoneNo,
+            phoneNo: data.phone,
             address: data.address
         })
         postDetail.save();
@@ -67,7 +67,7 @@ module.exports = {
          * save record
          */
         User.findOne({
-            username: date.username
+            username: data.username
         }).then(user => {
             // if the user exists, add order and post details
             if(user) {
