@@ -4,7 +4,7 @@ import AddRecord from './AddRecord'
 
 class RecordsTable extends React.Component {
     constructor(props) {
-        super(porps);
+        super(props);
         this.state = {
             toAddPage: false
         }
@@ -44,14 +44,14 @@ class RecordsTable extends React.Component {
                       </tr>
                     </thead>
                   <tbody>
-                    {/* {records.map((record, index) => {
+                    {/* {records.map((record, index) => (
                         <tr>
                             <th scope="row">index</th>
                             <td>Mark</td>
                             <td>Otto</td>
                             <td>@mdo</td>
                         </tr>
-                    })} */}
+                    ))} */}
                   </tbody>
                 </table>
             </>

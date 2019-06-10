@@ -56,7 +56,7 @@ class AddRecord extends React.Component {
                   <div className="form-group">
                     <label for="items">Items</label>
                     {this.state.itemInputs.map(itemInput => {
-                        <FormInput />
+                        return <FormInput />
                     })}
                   </div>
                   <button onClick={this.appendInput}>
