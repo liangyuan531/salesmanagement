@@ -53,3 +53,16 @@ main {
 .records-table {
     margin-top: 10mm;
 }
+
+#addItemBtn {
+    margin-left: 50em;
+    margin-top: 1em;
+}
+
+.addRecord {
+    margin-top: 10mm;
+}
+
+.form-row {
+    margin-bottom: 5mm;
+}

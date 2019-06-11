@@ -1,27 +1,27 @@
 import React from 'react'
 import FormInput from './FormInput'
-import { withRouter } from 'react-router-dom'
 
 class AddRecord extends React.Component {
     constructor(props) {
-        super(props)
-        this.state = {
-            itemInputs: ['item-0']
-        }
+      super(props)
+      this.state = {
+          itemInputs: ['item-0']
+      }
     }
     appendInput = () => {
-        var newInput = `item-${this.state.itemInputs.length}`;
-        this.setState({
-            itemInputs: [...this.state.itemInputs, newInput]
-        })
+      var newInput = `item-${this.state.itemInputs.length}`;
+      this.setState({
+          itemInputs: [...this.state.itemInputs, newInput]
+      })
     }
     handleSubmit = (e) => {
-        e.preventDefault();
-
+      e.preventDefault();
+      const data = new FormData(e.targer);
+      console.log(data); 
     }
     render() {
         return(
-            <div>
+            <div className="addRecord">
                 <form onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <label for="user" className="col-sm-2 col-form-label">User</label>
@@ -71,7 +71,7 @@ class AddRecord extends React.Component {
                           <FormInput />
                       ))}
                     </div>
-                    <button className="btn btn-primary" onClick={this.appendInput}>
+                    <button id="addItemBtn" className="btn btn-primary" onClick={this.appendInput}>
                      Add Item
                     </button>
                   </div>         
@@ -82,4 +82,4 @@ class AddRecord extends React.Component {
     }
 }
 
-export default withRouter(AddRecord);
+export default AddRecord;
