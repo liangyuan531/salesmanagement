@@ -1,6 +1,5 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import AddRecord from './AddRecord'
 
 class RecordsTable extends React.Component {
     constructor(props) {
@@ -18,17 +17,17 @@ class RecordsTable extends React.Component {
 
     render() {
         const records = this.props.records;
-        console.log("records",records);
+        console.log("records from props: ",records);
         if(this.state.toAddPage === true) {
             return <Redirect to='/addRecord' />
         }
         return(
             <>
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-primary">Delete</button>
-                  <button type="button" class="btn btn-primary" onClick={this.addRecord}>Add</button>
+                <div className="btn-group" role="group">
+                  <button type="button" className="btn btn-danger">Delete</button>
+                  <button type="button" className="btn btn-primary" onClick={this.addRecord}>Add</button>
                 </div>
-                <table class="table">
+                <table className="table">
                   <thead>
                       <tr>
                         <th scope="col">Date</th>
