@@ -1,4 +1,4 @@
-import { GET_ALL_RECORDS } from '../actions/actionType'
+import { GET_ALL_RECORDS, ADD_RECORDS } from '../actions/actionType'
 
 const initialState = {
     records: []
@@ -10,6 +10,10 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 records: action.payload
+            }
+        case ADD_RECORDS:
+            return {
+                records: [...state.records, action.payload]
             }
         default:
             return state;

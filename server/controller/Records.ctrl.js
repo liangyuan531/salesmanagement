@@ -45,7 +45,7 @@ module.exports = {
         // 2. post details (receiver, phone number, address)
         // 3. record's items (itemName, price, amount)
         let data = req.body;
-        //let {orderErr, isValid} = validateInput(data);
+        //let {orderErr, isValid} = validateOrderInput(data);
 
         // if validation not passing, return error
         // if(!isValid) {

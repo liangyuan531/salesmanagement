@@ -1,4 +1,4 @@
-import { GET_ALL_RECORDS } from './actionType'
+import { GET_ALL_RECORDS, ADD_RECORDS } from './actionType'
 import axios from 'axios'
 import { URL } from './reqURL'
 
@@ -10,6 +10,19 @@ export const getAllRecords = () => dispatch => {
                 type: GET_ALL_RECORDS,
                 payload: res.data
             })
+        }).catch(err => {
+            console.log(err);
+        })
+}
+
+export const addRecord = (record) => {
+    axios.post(`${URL}/records/add`, record).
+        then(res=>{
+            console.log(res);
+            // dispatch({
+            //     type: ADD_RECORDS,
+            //     payload: res.data
+            // })
         }).catch(err => {
             console.log(err);
         })

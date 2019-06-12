@@ -1,5 +1,7 @@
 import React from 'react'
 import FormInput from './FormInput'
+import { connect } from 'react-redux'
+import { addRecord } from '../redux/actions/recordsAction'
 
 class AddRecord extends React.Component {
     constructor(props) {
@@ -17,7 +19,9 @@ class AddRecord extends React.Component {
     handleSubmit = (e) => {
       e.preventDefault();
       const data = new FormData(e.target);
-      console.log(data); 
+      console.log(data);
+      this.props.addRecord(data);
+      //this.props.history.push('/');
     }
     render() {
         return(
@@ -82,4 +86,4 @@ class AddRecord extends React.Component {
     }
 }
 
-export default AddRecord;
+export default connect(null, {addRecord})(AddRecord);
