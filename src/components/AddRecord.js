@@ -16,7 +16,7 @@ class AddRecord extends React.Component {
     }
     handleSubmit = (e) => {
       e.preventDefault();
-      const data = new FormData(e.targer);
+      const data = new FormData(e.target);
       console.log(data); 
     }
     render() {
