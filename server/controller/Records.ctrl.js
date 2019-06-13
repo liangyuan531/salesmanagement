@@ -39,7 +39,7 @@ module.exports = {
     },
 
     addRecord: (req, res) => {
-        console.log(req.body);
+        console.log("server data: ",req.body);
         // here, data should have 3 parts infomation:
         // 1. user (username, isVip)
         // 2. post details (receiver, phone number, address)
@@ -51,37 +51,37 @@ module.exports = {
         // if(!isValid) {
         //     return res.status(400).send(orderErr);
         // }
-        const postDetail = new PostDetails({
-            receiver: data.receiver,
-            phoneNo: data.phone,
-            address: data.address
-        })
-        postDetail.save();
+        // const postDetail = new PostDetails({
+        //     receiver: data.receiver,
+        //     phoneNo: data.phone,
+        //     address: data.address
+        // })
+        // postDetail.save();
 
-        const record = new Records({
-            date: new Date()
-        })
-        record.save();
+        // const record = new Records({
+        //     date: new Date()
+        // })
+        // record.save();
         
-        /**
-         * save record
-         */
-        User.findOne({
-            username: data.username
-        }).then(user => {
-            // if the user exists, add order and post details
-            if(user) {
-                crateNewRecords(data, user, record, postDetail, res);
-            }else { 
-                new User({
-                    username: data.username,
-                    isVip: data.isVip
-                }).save((err, user) => {
-                    if(err) res.send('cannot create user');
-                    crateNewRecords(data, user, record, postDetail, res);
-                });
-            }
-        })
+        // /**
+        //  * save record
+        //  */
+        // User.findOne({
+        //     username: data.username
+        // }).then(user => {
+        //     // if the user exists, add order and post details
+        //     if(user) {
+        //         crateNewRecords(data, user, record, postDetail, res);
+        //     }else { 
+        //         new User({
+        //             username: data.username,
+        //             isVip: data.isVip
+        //         }).save((err, user) => {
+        //             if(err) res.send('cannot create user');
+        //             crateNewRecords(data, user, record, postDetail, res);
+        //         });
+        //     }
+        // })
     },
 
     updateRecord: (req, res) => {

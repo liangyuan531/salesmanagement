@@ -10,7 +10,7 @@ function FormInput() {
             <input type="text" class="form-control" id="salePrice" name="salePrice" placeholder="Sale price" required />
           </div>
           <div class="col">
-            <input type="text" class="form-control" id="purchasePrice" name="purchasePrice" placeholder="Last name" required />
+            <input type="text" class="form-control" id="purchasePrice" name="purchasePrice" placeholder="Purchase Price" required />
           </div>
           <div class="col">
             <input type="text" class="form-control" id="amount" name="amount" placeholder="Amount" required />
