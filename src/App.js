@@ -16,7 +16,7 @@ import './stylesheets/style.css'
 
 function App() {
   return (
-    <div className="App">
+    // <div className="App">
       <Provider store={store}>
         <Router>
           <div>
@@ -42,7 +42,7 @@ function App() {
           </div>
         </Router>
       </Provider>
-    </div>
+    // </div>
   );
 }
 
