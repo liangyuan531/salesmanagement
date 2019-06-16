@@ -9,3 +9,5 @@ React as client and node.js as server.
 
 
 https://medium.com/@everdimension/how-to-handle-forms-with-just-react-ac066c48bd4f
+
+Error: Actions must be plain objects. Use custom middleware for async actions.
