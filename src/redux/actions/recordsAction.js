@@ -16,9 +16,9 @@ export const getAllRecords = () => dispatch => {
 }
 
 export const addRecord = (record) => {
-    axios.post(`${URL}/records/add`, record).
-        then(res=>{
-            console.log("res: ".res);
+    axios.post(`${URL}/records/add`, record)
+        .then(res=>{
+            console.log("res: ", res);
             // dispatch({
             //     type: ADD_RECORDS,
             //     payload: res.data
