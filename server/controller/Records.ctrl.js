@@ -27,7 +27,7 @@ const crateNewRecords = (data, user, record, postDetail, res) => {
 
 module.exports = {
     getAllRecords: (req, res) => {
-        console.log(req.body);
+        console.log("records controller ========================");
         Records.find({})
                 .populate({path: 'user', populate: {path: 'postDetails'}})
                 .populate('items')

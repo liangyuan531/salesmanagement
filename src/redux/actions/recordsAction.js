@@ -5,7 +5,7 @@ import { URL } from './reqURL'
 export const getAllRecords = () => dispatch => {
     axios.get(`${URL}/records/admin`)
         .then(res => {
-            console.log(res);
+            console.log("action: get all records: ", res.data);
             dispatch({
                 type: GET_ALL_RECORDS,
                 payload: res.data

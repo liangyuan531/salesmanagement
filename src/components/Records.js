@@ -9,7 +9,7 @@ class Records extends React.Component {
     }
     render() {
         const records = this.props.records;
-        console.log('re: ', records);
+        console.log('records page: ', records);
         return(
             <div className="records-table">
                 <RecordsTable records={records}/>
