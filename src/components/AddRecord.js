@@ -52,7 +52,7 @@ class AddRecord extends React.Component {
                     </div>
                   </div>
                   <div className="form-group">
-                    <legend class="col-form-label col-sm-2 pt-0">VIP</legend>
+                    <legend className="col-form-label col-sm-2 pt-0">VIP</legend>
                     <div className="col-sm-10">
                       <div className="form-check form-check-inline">
                         <input className="form-check-input" type="radio" name="isVip" id="isVip" defaultChecked />

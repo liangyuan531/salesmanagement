@@ -23,7 +23,7 @@ function App() {
             <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
               <TopBar />
             </nav>
-            <div class="container-fluid">
+            <div className="container-fluid">
               <div className="row">
                 <nav className="col-md-2 d-none d-md-block bg-light sidebar">
                   <Navigator />
