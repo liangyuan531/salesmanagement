@@ -19,7 +19,7 @@ class AddRecord extends React.Component {
     handleSubmit = (e) => {
       e.preventDefault();
       const data = new FormData(e.target);
-      console.log(data);
+      console.log('form data: ',data.get('username'));
       //this.props.addRecord(data);
       //this.props.history.push('/');
     }
