@@ -14,4 +14,4 @@ UserSchema.methods.addPostDetails = function(id) {
     return this.save()
 }
 
-module.export = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

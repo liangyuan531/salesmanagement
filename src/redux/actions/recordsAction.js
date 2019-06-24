@@ -1,4 +1,4 @@
-import { GET_ALL_RECORDS, ADD_RECORDS } from './actionType'
+import { GET_ALL_RECORDS, /*ADD_RECORDS*/ } from './actionType'
 import axios from 'axios'
 import { URL } from './reqURL'
 

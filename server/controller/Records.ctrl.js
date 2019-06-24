@@ -28,10 +28,10 @@ const crateNewRecords = (data, user, record, postDetail, res) => {
 module.exports = {
     getAllRecords: (req, res) => {
         console.log("records controller ========================");
-        Records.find({})
+        Records.find()
                 .populate({path: 'user', populate: {path: 'postDetails'}})
                 .populate('items')
-                .exec(function(err, records) {
+                .exec((err, records) => {
                     console.log('records: ', records);
                     if(err) res.send('cannot find records');
                     res.send(records);

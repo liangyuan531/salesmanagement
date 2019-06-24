@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 const routes = require('./routes/');
 const router = express.Router()
 
-const url = "mongodb+srv://admin:ezGqnXDQyIpPDrCq@cluster0-a0kj5.mongodb.net/test?retryWrites=true";
+const url = "mongodb+srv://admin:ezGqnXDQyIpPDrCq@cluster0-a0kj5.mongodb.net/management?retryWrites=true";
 mongoose.connect(url,{ useNewUrlParser: true, useCreateIndex: true })
 .then(() => { console.log(`Succesfully Connected to the Mongodb Database`)})
 .catch(() => { console.log(`Error connecting to the database`)})

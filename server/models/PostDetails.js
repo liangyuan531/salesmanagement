@@ -15,4 +15,4 @@ PostDetailsSchema.methods.addItem = function(id) {
     return this.save();
 }
 
-module.export = mongoose.model('PostDetails', PostDetailsSchema);
+module.exports = mongoose.model('PostDetails', PostDetailsSchema);

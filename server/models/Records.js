@@ -14,12 +14,12 @@ const RecordsSchema = new mongoose.Schema({
 
 RecordsSchema.methods.applyUser = function(id) {
     this.user = id;
-    return this.save()
+    return this.save();
 }
 
 RecordsSchema.methods.addItem = function(id) {
     this.items.push(id);
-    return this.save()
+    return this.save();
 }
 
-module.export = mongoose.model('Records', RecordsSchema);
+module.exports = mongoose.model('Records', RecordsSchema);

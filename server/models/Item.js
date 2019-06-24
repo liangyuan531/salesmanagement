@@ -7,4 +7,4 @@ const ItemSchema = new mongoose.Schema({
     amount: {type: Number, required: true},
 })
 
-module.export = mongoose.model('Item', ItemSchema);
+module.exports = mongoose.model('Item', ItemSchema);

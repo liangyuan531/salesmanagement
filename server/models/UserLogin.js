@@ -14,4 +14,4 @@ UserLoginSchema.methods.addInfo = function(id) {
     return this.save();
 }
 
-module.export = mongoose.model('UserLogin', UserLoginSchema);
+module.exports = mongoose.model('UserLogin', UserLoginSchema);
