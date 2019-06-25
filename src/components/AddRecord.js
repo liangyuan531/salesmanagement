@@ -19,8 +19,13 @@ class AddRecord extends React.Component {
     handleSubmit = (e) => {
       e.preventDefault();
       const data = new FormData(e.target);
-      console.log('form data: ',data.get('username'));
-      //this.props.addRecord(data);
+      console.log('form data: ',data.getAll('itemName'));
+      const records = [...data.entries()]
+      // .reduce((acc, [k, v]) => {
+      //   acc[k] = v;
+      //   return acc;
+      // }, {})
+      this.props.addRecord(records);
       //this.props.history.push('/');
     }
     render() {
@@ -55,13 +60,13 @@ class AddRecord extends React.Component {
                     <legend className="col-form-label col-sm-2 pt-0">VIP</legend>
                     <div className="col-sm-10">
                       <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="radio" name="isVip" id="isVip" defaultChecked />
+                        <input className="form-check-input" type="radio" name="isVip" id="isVip" value="yes"/>
                         <label className="form-check-label">
                           Yes
                         </label>
                       </div>
                       <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="radio" name="isVip" id="notVip" defaultChecked />
+                        <input className="form-check-input" type="radio" name="isVip" id="notVip" value="no" defaultChecked />
                         <label className="form-check-label">
                           No
                         </label>

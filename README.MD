@@ -10,4 +10,16 @@ React as client and node.js as server.
 
 https://medium.com/@everdimension/how-to-handle-forms-with-just-react-ac066c48bd4f
 
-Error: Actions must be plain objects. Use custom middleware for async actions.
+[ [ 'username', 'admin' ],
+  [ 'receiver', 'jack' ],
+  [ 'phone', '413607664' ],
+  [ 'address', '1/4 Oliver St, ' ],
+  [ 'isVip', 'no' ],
+  [ 'itemName[]', 'vc' ],
+  [ 'salePrice[]', '100' ],
+  [ 'purchasePrice[]', '100' ],
+  [ 'amount[]', '1' ],
+  [ 'itemName[]', 'vd' ],
+  [ 'salePrice[]', '100' ],
+  [ 'purchasePrice[]', '100' ],
+  [ 'amount[]', '1' ] ]
