@@ -37,7 +37,21 @@ module.exports = {
                     res.send(records);
                 });
     },
-
+    /*
+        [ [ 'username', 'admin' ],
+  [ 'receiver', 'jack' ],
+  [ 'phone', '413607664' ],
+  [ 'address', '1/4 Oliver St, ' ],
+  [ 'isVip', 'no' ],
+  [ 'itemName[]', 'vc' ],
+  [ 'salePrice[]', '100' ],
+  [ 'purchasePrice[]', '100' ],
+  [ 'amount[]', '1' ],
+  [ 'itemName[]', 'vd' ],
+  [ 'salePrice[]', '100' ],
+  [ 'purchasePrice[]', '100' ],
+  [ 'amount[]', '1' ] ]
+    */
     addRecord: (req, res) => {
         console.log("server data: ",req.body);
         // here, data should have 3 parts infomation:
@@ -45,6 +59,24 @@ module.exports = {
         // 2. post details (receiver, phone number, address)
         // 3. record's items (itemName, price, amount)
         let data = req.body;
+        let record = {};
+        // process input data, extract data except items
+        for(let i=0;i<5;i++) {
+            record[data[i][0]] = data[i][1];
+        }
+        console.log('1st proceed record: ', record);
+        let items = [];
+        // process items, add them into an array
+        for(let i=5;i<record.length;i++) {
+            let item = {};
+            item[data[i][0]] = data[i][1];
+            items.push(item);
+        }
+        console.log('proceed items: ', items);
+        // add items to record
+        record['items'] = items;
+        console.log('2nd proceed record: ', record);
+        
         //let {orderErr, isValid} = validateOrderInput(data);
 
         // if validation not passing, return error
