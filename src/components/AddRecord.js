@@ -19,7 +19,7 @@ class AddRecord extends React.Component {
     handleSubmit = (e) => {
       e.preventDefault();
       const data = new FormData(e.target);
-      console.log('form data: ',data.getAll('itemName'));
+      //console.log('form data: ',data.getAll('itemName'));
       const records = [...data.entries()]
       // .reduce((acc, [k, v]) => {
       //   acc[k] = v;

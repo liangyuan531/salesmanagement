@@ -10,7 +10,7 @@ const PostDetailsSchema = new mongoose.Schema({
     }]
 })
 
-PostDetailsSchema.methods.addItem = function(id) {
+PostDetailsSchema.methods.addItem = function(id) { 
     this.items.push(id);
     return this.save();
 }

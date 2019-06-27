@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
 })
 
 UserSchema.methods.addPostDetails = function(id) {
-    this.userDetails.push(id);
+    this.postDetails.push(id);
     return this.save()
 }
 
