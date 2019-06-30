@@ -5,29 +5,6 @@ const Item = require('../models/Item')
 
 const validateInput = require('../validation/order.validation')
 
-const crateNewRecords = (data, user, record, postDetail, res) => {
-    // add purchased items to post detail
-    for(let i=0;i<data.items.length;i++){
-        const item = new Item({
-            itemName: data.items[i].itemName,
-            purchasePrice: data.items[i].purchasePrice,
-            salePrice: data.items[i].salePrice,
-            amount: data.items[i].amount,
-        })
-        item.save();
-        console.log('item saved');
-        postDetail.addItem(item._id);
-        // add items to record
-        record.addItem(item._id);
-    }
-    user.addPostDetails(postDetail._id);
-    // add user to record
-    record.applyUser(user._id);
-    console.log('record: ', record);
-    
-    return res.send(record);
-}
-
 module.exports = {
     getAllRecords: (req, res) => {
         console.log("records controller ========================");
@@ -58,18 +35,18 @@ module.exports = {
         }
     */
     addRecord: (req, res) => {
-        //console.log("server data: ",req.body);
-        // here, data should have 3 parts infomation:
-        // 1. user (username, isVip)
-        // 2. post details (receiver, phone number, address)
-        // 3. record's items (itemName, price, amount)
+        /** 
+            here, data should have 3 parts infomation:
+            1. user (username, isVip)
+            2. post details (receiver, phone number, address)
+            3. record's items (itemName, salePrice, purchasePrice, amount)
+        */
         let data = req.body;
         let record = {};
         // process input data, extract data except items
         for(let i=0;i<5;i++) {
             record[data[i][0]] = data[i][1];
         }
-        //console.log('1st proceed record: ', record);
         let items = [];
         let item = {};
         // process items, add them into an array
@@ -81,27 +58,14 @@ module.exports = {
                 item = {}
             }
         }
-        //console.log('proceed items: ', items);
         // add items to record
         record['items'] = items;
-        //console.log('2nd proceed record: ', record);
-        //let {orderErr, isValid} = validateOrderInput(data);
-
+        //console.log('proceed record: ', record);
+        //let {orderErr, isValid} = validateOrderInput(record);
         // if validation not passing, return error
         // if(!isValid) {
         //     return res.status(400).send(orderErr);
         // }
-        const postDetail = new PostDetails({
-            receiver: record.receiver,
-            phoneNo: record.phone,
-            address: record.address
-        })
-        postDetail.save();
-
-        const newRecord = new Records({
-            date: new Date()
-        })
-        newRecord.save();
         
         /**
          * save record
@@ -111,8 +75,8 @@ module.exports = {
         }).then(user => {
             // if the user exists, add order and post details
             if(user) {
-                console.log('exist user \n');
-                crateNewRecords(record, user, newRecord, postDetail, res);
+                console.log(`exist user ${user} \n`);
+                crateNewRecords(user, record);
             }else { 
                 console.log('create user \n');
                 new User({
@@ -120,10 +84,43 @@ module.exports = {
                     isVip: record.isVip
                 }).save((err, user) => {
                     if(err) res.send('cannot create user');
-                    crateNewRecords(record, user, newRecord, postDetail, res);
+                    crateNewRecords(user, record);
                 });
             }
         })
+
+        function crateNewRecords(user, record) {
+            const postDetail = new PostDetails({
+                receiver: record.receiver,
+                phoneNo: record.phone,
+                address: record.address
+            })
+            postDetail.save();
+    
+            const newRecord = new Records({
+                date: new Date()
+            })
+            newRecord.save();
+            // add purchased items to post detail
+            for(let i=0;i<record.items.length;i++){
+                const item = new Item({
+                    itemName: record.items[i].itemName,
+                    purchasePrice: record.items[i].purchasePrice,
+                    salePrice: record.items[i].salePrice,
+                    amount: record.items[i].amount,
+                })
+                item.save();
+                console.log('item saved');
+                postDetail.addItem(item._id);
+                // add items to record
+                newRecord.addItem(item._id);
+            }
+            user.addPostDetails(postDetail._id);
+            // add user to record
+            newRecord.applyUser(user._id);
+            console.log('record: ', newRecord);
+            return res.send(newRecord);
+        }
     },
 
     updateRecord: (req, res) => {
