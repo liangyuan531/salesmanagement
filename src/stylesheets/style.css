@@ -67,7 +67,7 @@ main {
     margin-bottom: 5mm;
 }
 
-#signout {
+#signout, #deleteInput {
     background-color: transparent;
     border: none;
 }

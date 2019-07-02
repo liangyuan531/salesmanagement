@@ -28,6 +28,13 @@ class AddRecord extends React.Component {
       this.props.addRecord(records);
       //this.props.history.push('/');
     }
+    deleteInput = (id) => {
+      this.setState({
+        itemInputs: this.state.itemInputs.filter(input=>{
+          return input != id;
+        })
+      })
+    }
     render() {
         return(
             <div className="addRecord">
@@ -77,7 +84,7 @@ class AddRecord extends React.Component {
                     <label className="col-sm-2 col-form-label">Items</label>
                     <div className="col-sm-10">
                       {this.state.itemInputs.map((itemInput) => (
-                          <FormInput key={itemInput}/>
+                          <FormInput key={itemInput} delete={this.deleteInput}/>
                       ))}
                     </div>
                     <button id="addItemBtn" className="btn btn-primary" onClick={this.appendInput}>
