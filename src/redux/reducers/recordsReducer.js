@@ -1,4 +1,4 @@
-import { GET_ALL_RECORDS, ADD_RECORDS } from '../actions/actionType'
+import { GET_ALL_RECORDS, ADD_RECORDS, DELETE_RECORDS } from '../actions/actionType'
 
 const initialState = {
     records: []
@@ -14,6 +14,10 @@ export default function(state = initialState, action) {
         case ADD_RECORDS:
             return {
                 records: [...state.records, action.payload]
+            }
+        case DELETE_RECORDS: 
+            return {
+                records: [...state.records].filter(record => record._id != action.payload)
             }
         default:
             return state;

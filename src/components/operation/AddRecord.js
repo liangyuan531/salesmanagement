@@ -1,7 +1,7 @@
 import React from 'react'
-import FormInput from './FormInput'
+import FormInput from '../FormInput'
 import { connect } from 'react-redux'
-import { addRecord } from '../redux/actions/recordsAction'
+import { addRecord } from '../../redux/actions/recordsAction'
 
 class AddRecord extends React.Component {
     constructor(props) {
@@ -19,14 +19,9 @@ class AddRecord extends React.Component {
     handleSubmit = (e) => {
       e.preventDefault();
       const data = new FormData(e.target);
-      //console.log('form data: ',data.getAll('itemName'));
       const records = [...data.entries()]
-      // .reduce((acc, [k, v]) => {
-      //   acc[k] = v;
-      //   return acc;
-      // }, {})
       this.props.addRecord(records);
-      //this.props.history.push('/');
+      this.props.history.push('/');
     }
     deleteInput = (id) => {
       this.setState({
@@ -98,4 +93,4 @@ class AddRecord extends React.Component {
     }
 }
 
-export default connect(null, {addRecord})(AddRecord);
+export default connect(null, { addRecord })(AddRecord);

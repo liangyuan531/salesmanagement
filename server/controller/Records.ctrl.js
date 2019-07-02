@@ -131,21 +131,24 @@ module.exports = {
     },
 
     deleteRecord: (req, res) => {
-        console.log(req.params.id);
+        let recordId = req.params.id;
+        console.log('delete param: ', recordId);
         // delete record items
-        Records.findById(recordId)
-                .populate('items')
-                .exec((err, record) => {
-                    console.log('delete record: ', record);
-                    record.items.map(item => {
-                        Item.findByIdAndRemove(item._id);
-                    })
-                })
-        // delele record
-        Records.findByIdAndRemove(recordId, err => {
-            if(err) res.json({'message': '0'});
-            res.json({'message': '1'})
-        });
+        // Records.findById(recordId)
+        //         .populate('items')
+        //         .exec((err, record) => {
+        //             console.log('delete record: ', record);
+        //             record.items.map(item => {
+        //                 Item.findByIdAndRemove(item._id, err => {
+        //                     if(err) res.json({'message': '0'})
+        //                 });
+        //             })
+        //         })
+        // // delele record
+        // Records.findByIdAndRemove(recordId, err => {
+        //     if(err) res.json({'message': '0'});
+        // });
+        // res.send(recordId);
     },
     /** 
      * users view their own orders
