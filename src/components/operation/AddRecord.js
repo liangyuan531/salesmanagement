@@ -26,7 +26,7 @@ class AddRecord extends React.Component {
     deleteInput = (id) => {
       this.setState({
         itemInputs: this.state.itemInputs.filter(input=>{
-          return input != id;
+          return input !== id;
         })
       })
     }

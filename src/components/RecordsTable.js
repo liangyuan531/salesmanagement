@@ -18,16 +18,7 @@ class RecordsTable extends React.Component {
     }
 
     dateFormat = (date) => {
-        let monthNames = [
-            "January", "February", "March",
-            "April", "May", "June", "July",
-            "August", "September", "October",
-            "November", "December"
-        ];
-        let day = date.getDate();
-        let monthIndex = date.getMonth();
-        let year = date.getFullYear();
-        return day + '/' + monthNames[monthIndex] + '/' + year;
+        return date.slice(0,10);
     }
 
     updateRecord = (id) => {
@@ -38,7 +29,7 @@ class RecordsTable extends React.Component {
         this.props.deleteRecord(id);
     }
     render() {
-        const records = this.props.records;
+        const records = this.props.records.records;
         console.log("records from props: ",records);
         if(this.state.toAddPage === true) {
             return <Redirect to='/addRecord' />
@@ -54,10 +45,10 @@ class RecordsTable extends React.Component {
                       <tr>
                         <th scope="col">Date</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Vip</th>
                         <th scope="col">Receiver</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Address</th>
-                        <th scope="col">Vip</th>
                         <th scope="col">Items</th>
                         <th scope="col">Sale Price</th>
                         <th scope="col">Count</th>
@@ -67,22 +58,28 @@ class RecordsTable extends React.Component {
                     </thead>
                   <tbody>
                     {records ? records.map(record => (
-                        <tr>
-                            <td scope="col">{this.dateFormat(record.date)}</td>
-                            <td scope="col">{record.username}</td>
-                            <td scope="col">{record.receiver}</td>
-                            <td scope="col">{record.phone}</td>
-                            <td scope="col">{record.address}</td>
-                            <td scope="col">{record.isVip}</td>
-                            <td scope="col" colspan="4">
-                            {record.items.map(item => {
-                                <tr>
-                                    <td scope="col">{item.itemName}</td>
-                                    <td scope="col">{item.salePrice}</td>
-                                    <td scope="col">{item.amount}</td>
-                                    <td scope="col">{item.purchasePrice}</td>
-                                </tr>
-                            })}
+                        <tr key={record._id}>
+                            <td>{this.dateFormat(record.date)}</td>
+                            <td>{record.user.username}</td>
+                            <td>{record.user.isVip ? 'Yes' : 'No'}</td>
+                            <td colspan="4">
+                            {record.user.postDetails.map(detail => (
+                                <div key={detail._id}>
+                                    <td>{detail.receiver}</td>
+                                    <td>{detail.phoneNo}</td>
+                                    <td>{detail.address}</td>
+                                    <td>
+                                        {detail.items.map(item => (
+                                           <div key={item._id}>
+                                            <td>{item.itemName}</td>
+                                            <td>{item.salePrice}</td>
+                                            <td>{item.amount}</td>
+                                            <td>{item.purchasePrice}</td>
+                                           </div> 
+                                        ))}
+                                    </td>
+                                </div>
+                            ))}
                             </td>
                             <td>
                                 <div className="btn-group" role="group">

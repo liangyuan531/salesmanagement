@@ -17,7 +17,7 @@ export default function(state = initialState, action) {
             }
         case DELETE_RECORDS: 
             return {
-                records: [...state.records].filter(record => record._id != action.payload)
+                records: [...state.records].filter(record => record._id !== action.payload)
             }
         default:
             return state;

@@ -20,7 +20,7 @@ class FormInput extends React.Component {
           <input type="text" className="form-control" id="amount" name="amount" placeholder="Amount" required />
         </div>
         <div className="col-sm-1">
-          <button id="deleteInput" onClick={this.deleteInput}><img src="../source/x-circle.svg"></img></button>
+          <button id="deleteInput" onClick={this.deleteInput}><img src="../source/x-circle.svg" alt="x"></img></button>
         </div>
       </div>
     )
