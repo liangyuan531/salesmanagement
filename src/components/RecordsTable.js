@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { deleteRecord } from '../redux/actions/recordsAction'
 
@@ -65,15 +65,15 @@ class RecordsTable extends React.Component {
                             <td>{record.postDetail.receiver}</td>
                             <td>{record.postDetail.phoneNo}</td>
                             <td>{record.postDetail.address}</td> 
-                            <td colspan="4">
+                            <td colSpan="4">
                                 <table className="table">
                                     <tbody>
                                         {record.items.map(item =>(
                                             <tr key={item._id}>
-                                                <td>{item.itemName}</td>
-                                                <td>{item.salePrice}</td>
-                                                <td>{item.amount}</td>
-                                                <td>{item.purchasePrice}</td>
+                                                <td align="left">{item.itemName}</td>
+                                                <td align="left">{item.salePrice}</td>
+                                                <td align="left">{item.amount}</td>
+                                                <td align="left">{item.purchasePrice}</td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -122,4 +122,4 @@ class RecordsTable extends React.Component {
 }
 
 
-export default connect(null, { deleteRecord })(RecordsTable);
+export default withRouter( connect(null, { deleteRecord })(RecordsTable) );

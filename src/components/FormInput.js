@@ -2,7 +2,7 @@ import React from 'react';
 
 class FormInput extends React.Component {
   deleteInput = () => {
-    this.props.delete(this.props.key);
+    this.props.delete(this.props.inputs);
   }
   render(){
     return(

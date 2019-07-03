@@ -79,7 +79,7 @@ class AddRecord extends React.Component {
                     <label className="col-sm-2 col-form-label">Items</label>
                     <div className="col-sm-10">
                       {this.state.itemInputs.map((itemInput) => (
-                          <FormInput key={itemInput} delete={this.deleteInput}/>
+                          <FormInput key={itemInput} inputs={itemInput} delete={this.deleteInput}/>
                       ))}
                     </div>
                     <button id="addItemBtn" className="btn btn-primary" onClick={this.appendInput}>

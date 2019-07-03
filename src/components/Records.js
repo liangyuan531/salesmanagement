@@ -4,9 +4,15 @@ import { connect } from 'react-redux'
 import { getAllRecords } from '../redux/actions/recordsAction'
 
 class Records extends React.Component {
-    componentDidMount() {
+    constructor(props) {
+        super(props);
         this.props.getAllRecords();
     }
+
+    // componentDidMount() {
+    //     this.
+    // }
+
     render() {
         const records = this.props.records;
         console.log('records page: ', records);

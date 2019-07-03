@@ -12,7 +12,7 @@ module.exports = {
                 //.populate({path: 'user', populate: {path: 'postDetails'}})
                 .populate('user')
                 .populate('items')
-                .populate('postDetails')
+                .populate('postDetail')
                 .exec((err, records) => {
                     console.log('records: ', records);
                     if(err) res.send('cannot find records');

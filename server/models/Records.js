@@ -26,7 +26,7 @@ RecordsSchema.methods.addItem = function(id) {
     return this.save();
 }
 
-UserSchema.methods.addPostDetail = function(id) {
+RecordsSchema.methods.addPostDetail = function(id) {
     this.postDetail = id;
     return this.save()
 }
