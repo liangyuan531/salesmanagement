@@ -62,20 +62,9 @@ class RecordsTable extends React.Component {
                             <td>{this.dateFormat(record.date)}</td>
                             <td>{record.user.username}</td>
                             <td>{record.user.isVip ? 'Yes' : 'No'}</td>
-                            <td colspan="3">
-                                <table className="table">
-                                    <tbody>
-                                        {record.postDetails.map(detail => (
-                                            <tr key={detail._id}>
-                                                <td>{detail.receiver}</td>
-                                                <td>{detail.phoneNo}</td>
-                                                <td>{detail.address}</td>
-                                                
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </td>
+                            <td>{record.postDetail.receiver}</td>
+                            <td>{record.postDetail.phoneNo}</td>
+                            <td>{record.postDetail.address}</td> 
                             <td colspan="4">
                                 <table className="table">
                                     <tbody>

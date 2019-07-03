@@ -121,7 +121,7 @@ module.exports = {
             // add user to record
             newRecord.applyUser(user._id);
             // record add postdetails
-            newRecord.addPostDetails(postDetail._id)
+            newRecord.addPostDetail(postDetail._id)
             console.log('record: ', newRecord);
             return res.send(newRecord);
         }

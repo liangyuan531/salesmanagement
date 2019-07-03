@@ -9,10 +9,10 @@ const RecordsSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item'
     }],
-    postDetails: [{
+    postDetail: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'PostDetails'
-    }],
+    },
     date: Date
 })
 
@@ -26,8 +26,8 @@ RecordsSchema.methods.addItem = function(id) {
     return this.save();
 }
 
-UserSchema.methods.addPostDetails = function(id) {
-    this.postDetails.push(id);
+UserSchema.methods.addPostDetail = function(id) {
+    this.postDetail = id;
     return this.save()
 }
 

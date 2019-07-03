@@ -54,17 +54,13 @@ main {
     padding: .5rem 1rem;
 }
 
-.records-table {
+.records-table, .add-record, .update-record {
     margin-top: 10mm;
 }
 
 #addItemBtn {
     margin-left: 50em;
     margin-top: 1em;
-}
-
-.addRecord {
-    margin-top: 10mm;
 }
 
 .form-row {

@@ -8,6 +8,9 @@ import Report from './components/Report'
 import Error404 from './components/Error'
 import AddRecord from './components/operation/AddRecord'
 import UpdateRecord from './components/operation/UpdateRecord'
+import UpdateRecordItems from './components/operation/UpdateRecordItems'
+import UpdateRecordPostDetails from './components/operation/UpdateRecordPostDetails'
+
 
 import store from './redux/store'
 import { Provider } from 'react-redux'
@@ -36,6 +39,8 @@ function App() {
                     <Route path="/report" component={Report}/>
                     <Route path="/addRecord" component={AddRecord} />
                     <Route path="/updateRecord" component={UpdateRecord} />
+                    <Route paht="/updateRecord/items/" component={UpdateRecordItems}/>
+                    <Route paht="/updateRecord/postDetails/" component={UpdateRecordPostDetails}/>
                     <Route component={Error404}/>
                   </Switch>
                 </main>

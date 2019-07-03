@@ -32,7 +32,7 @@ class AddRecord extends React.Component {
     }
     render() {
         return(
-            <div className="addRecord">
+            <div className="add-record">
                 <form onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">User</label>
