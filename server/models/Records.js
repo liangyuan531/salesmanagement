@@ -9,6 +9,10 @@ const RecordsSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item'
     }],
+    postDetails: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'PostDetails'
+    }],
     date: Date
 })
 
@@ -20,6 +24,11 @@ RecordsSchema.methods.applyUser = function(id) {
 RecordsSchema.methods.addItem = function(id) {
     this.items.push(id);
     return this.save();
+}
+
+UserSchema.methods.addPostDetails = function(id) {
+    this.postDetails.push(id);
+    return this.save()
 }
 
 module.exports = mongoose.model('Records', RecordsSchema);

@@ -62,24 +62,33 @@ class RecordsTable extends React.Component {
                             <td>{this.dateFormat(record.date)}</td>
                             <td>{record.user.username}</td>
                             <td>{record.user.isVip ? 'Yes' : 'No'}</td>
-                            <td colspan="4">
-                            {record.user.postDetails.map(detail => (
-                                <div key={detail._id}>
-                                    <td>{detail.receiver}</td>
-                                    <td>{detail.phoneNo}</td>
-                                    <td>{detail.address}</td>
-                                    <td>
-                                        {detail.items.map(item => (
-                                           <div key={item._id}>
-                                            <td>{item.itemName}</td>
-                                            <td>{item.salePrice}</td>
-                                            <td>{item.amount}</td>
-                                            <td>{item.purchasePrice}</td>
-                                           </div> 
+                            <td colspan="3">
+                                <table className="table">
+                                    <tbody>
+                                        {record.postDetails.map(detail => (
+                                            <tr key={detail._id}>
+                                                <td>{detail.receiver}</td>
+                                                <td>{detail.phoneNo}</td>
+                                                <td>{detail.address}</td>
+                                                
+                                            </tr>
                                         ))}
-                                    </td>
-                                </div>
-                            ))}
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td colspan="4">
+                                <table className="table">
+                                    <tbody>
+                                        {record.items.map(item =>(
+                                            <tr key={item._id}>
+                                                <td>{item.itemName}</td>
+                                                <td>{item.salePrice}</td>
+                                                <td>{item.amount}</td>
+                                                <td>{item.purchasePrice}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
                             </td>
                             <td>
                                 <div className="btn-group" role="group">

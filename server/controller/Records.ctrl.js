@@ -9,8 +9,10 @@ module.exports = {
     getAllRecords: (req, res) => {
         console.log("records controller ========================");
         Records.find()
-                .populate({path: 'user', populate: {path: 'postDetails'}})
+                //.populate({path: 'user', populate: {path: 'postDetails'}})
+                .populate('user')
                 .populate('items')
+                .populate('postDetails')
                 .exec((err, records) => {
                     console.log('records: ', records);
                     if(err) res.send('cannot find records');
@@ -118,6 +120,8 @@ module.exports = {
             user.addPostDetails(postDetail._id);
             // add user to record
             newRecord.applyUser(user._id);
+            // record add postdetails
+            newRecord.addPostDetails(postDetail._id)
             console.log('record: ', newRecord);
             return res.send(newRecord);
         }
