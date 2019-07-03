@@ -138,21 +138,32 @@ module.exports = {
         let recordId = req.params.id;
         console.log('delete param: ', recordId);
         // delete record items
-        // Records.findById(recordId)
-        //         .populate('items')
-        //         .exec((err, record) => {
-        //             console.log('delete record: ', record);
-        //             record.items.map(item => {
-        //                 Item.findByIdAndRemove(item._id, err => {
-        //                     if(err) res.json({'message': '0'})
-        //                 });
-        //             })
-        //         })
-        // // delele record
-        // Records.findByIdAndRemove(recordId, err => {
-        //     if(err) res.json({'message': '0'});
-        // });
-        // res.send(recordId);
+        Records.findById(recordId)
+                .populate('items')
+                .exec(record => {
+                    console.log('delete record: ', record);
+                    record.items.map(item => {
+                        console.log('delete record items id: ', item._id);
+                        Item.findByIdAndRemove(item._id, err => {
+                            if(err) res.send({'message': '-1'})
+                        });
+                    })
+                })
+        // delete post details
+        Records.findById(recordId)
+                .populate('postDetail')
+                .exec(record => {
+                    console.log('delete record: ', record);
+                    console.log('delete record post detail id: ', record.postDetail._id);
+                    PostDetails.findByIdAndRemove(record.postDetail._id, err => {
+                        if(err) res.send({'message' : '-1'})
+                    });
+                })
+        // delele record
+        Records.findByIdAndRemove(recordId, err => {
+            if(err) res.send({'message': '-1'});
+        });
+        res.send(recordId);
     },
     /** 
      * users view their own orders
