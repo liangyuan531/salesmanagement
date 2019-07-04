@@ -7,6 +7,10 @@ class UpdateRecordPostDetails extends React.Component {
         super(props);
         // get history parms (recordId)
         // let recordId = this.props.location.state.recordId
+        // console.log("update post detail: ", recordId);
+        this.state = {
+          recordId: this.props.location.state.recordId
+        }
         // find record based on id
         // this.props.getRecordById(recordId)
     }
@@ -15,6 +19,7 @@ class UpdateRecordPostDetails extends React.Component {
         e.preventDefault();
     }
     render() {
+        console.log("update post detail: ", this.state.recordId);
         // let postDetail = this.props.record.postDetail
         return(
             <div className="update-record">
@@ -22,19 +27,19 @@ class UpdateRecordPostDetails extends React.Component {
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">Receiver Name</label>
                     <div className="col-sm-10">
-                      <input type="text" name="receiver" className="form-control" id="receiver" value="User name" />
+                      <input type="text" name="receiver" className="form-control" id="receiver" />
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">Phone Number</label>
                     <div className="col-sm-10">
-                      <input type="text" name="phoneNo" className="form-control" id="phoneNo" value="Receiver name" />
+                      <input type="text" name="phoneNo" className="form-control" id="phoneNo" />
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">Address</label>
                     <div className="col-sm-10">
-                      <input type="text" name="address" className="form-control" id="address" value="Phone Number" />
+                      <input type="text" name="address" className="form-control" id="address" />
                     </div>
                   </div>    
                   <button type="submit" className="btn btn-primary">Submit</button>

@@ -39,8 +39,8 @@ function App() {
                     <Route path="/report" component={Report}/>
                     <Route path="/addRecord" component={AddRecord} />
                     <Route path="/updateRecord" component={UpdateRecord} />
-                    <Route paht="/updateRecord/items/" component={UpdateRecordItems}/>
-                    <Route paht="/updateRecord/postDetails/" component={UpdateRecordPostDetails}/>
+                    <Route paht="/updateRecordItems" component={UpdateRecordItems}/>
+                    <Route paht="/updateRecordPostDetails" component={UpdateRecordPostDetails}/>
                     <Route component={Error404}/>
                   </Switch>
                 </main>
