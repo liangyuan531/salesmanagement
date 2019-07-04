@@ -2,8 +2,9 @@ const Records = require('../models/Records')
 const User = require('../models/User')
 const PostDetails = require('../models/PostDetails')
 const Item = require('../models/Item')
-
 const validateInput = require('../validation/order.validation')
+
+
 
 module.exports = {
     getAllRecords: (req, res) => {
@@ -155,14 +156,10 @@ module.exports = {
 
     deleteRecord: (req, res) => {
         let recordId = req.params.id;
-        console.log('delete param: ', recordId);
         // delete record items
         Records.findById(recordId)
-                .populate('items')
-                .exec(record => {
-                    console.log('delete record: ', record);
+                .exec((err, record) => {
                     record.items.map(item => {
-                        console.log('delete record items id: ', item._id);
                         Item.findByIdAndRemove(item._id, err => {
                             if(err) res.send({'message': '-1'})
                         });
@@ -170,10 +167,7 @@ module.exports = {
                 })
         // delete post details
         Records.findById(recordId)
-                .populate('postDetail')
-                .exec(record => {
-                    console.log('delete record: ', record);
-                    console.log('delete record post detail id: ', record.postDetail._id);
+                .exec((err, record) => {
                     PostDetails.findByIdAndRemove(record.postDetail._id, err => {
                         if(err) res.send({'message' : '-1'})
                     });

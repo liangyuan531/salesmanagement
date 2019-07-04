@@ -8,11 +8,7 @@ class Records extends React.Component {
         super(props);
         this.props.getAllRecords();
     }
-
-    // componentDidMount() {
-    //     this.
-    // }
-
+    
     render() {
         const records = this.props.records;
         console.log('records page: ', records);
