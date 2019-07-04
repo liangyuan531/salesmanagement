@@ -26,7 +26,7 @@ class Records extends React.Component {
 
 const mapStateToProps = (state) => ({
     records: state.records
-  })
+})
 
 
 export default connect(mapStateToProps, {getAllRecords})(Records);

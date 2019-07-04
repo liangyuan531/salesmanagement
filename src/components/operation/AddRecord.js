@@ -1,5 +1,5 @@
 import React from 'react'
-import FormInput from '../FormInput'
+import FormInput from './FormInput'
 import { connect } from 'react-redux'
 import { addRecord } from '../../redux/actions/recordsAction'
 
@@ -21,7 +21,7 @@ class AddRecord extends React.Component {
       const data = new FormData(e.target);
       const records = [...data.entries()]
       this.props.addRecord(records);
-      this.props.history.push('/');
+      this.props.history.push('/records');
     }
     deleteInput = (id) => {
       this.setState({
@@ -79,6 +79,7 @@ class AddRecord extends React.Component {
                     <label className="col-sm-2 col-form-label">Items</label>
                     <div className="col-sm-10">
                       {this.state.itemInputs.map((itemInput) => (
+                          // pass itemInput to FormInput as props to determine which to delete
                           <FormInput key={itemInput} inputs={itemInput} delete={this.deleteInput}/>
                       ))}
                     </div>

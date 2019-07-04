@@ -71,3 +71,7 @@ main {
     background-color: transparent;
     border: none;
 }
+
+.update-btn {
+    margin: auto;
+}

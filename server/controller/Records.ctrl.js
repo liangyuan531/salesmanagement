@@ -19,6 +19,18 @@ module.exports = {
                     res.send(records);
                 });
     },
+    getRecordById: (req, res) => {
+        let recordId = req.params.id;
+        Records.findById(recordId)
+                .populate('user')
+                .populate('items')
+                .populate('postDetail')
+                .exec((err, record) => {
+                    console.log("find record by id: ", record);
+                    if(err) res.send('cannot find record with id: ', recordId);
+                    res.send(record)
+                })
+    },
     /*
         { username: 'admin',
           receiver: 'jack',
@@ -127,11 +139,18 @@ module.exports = {
         }
     },
 
-    updateRecord: (req, res) => {
-        console.log(req.params.id);
-        console.log(req.body);
-        let recordId = mongoose.Types.ObjectId(req.params.id);
-        Records.findById(recordId)
+    updateRecordItems: (req, res) => {
+        // console.log(req.params.id);
+        // console.log(req.body);
+        // let recordId = mongoose.Types.ObjectId(req.params.id);
+        // Records.findById(recordId)
+    },
+
+    updateRecordPostDetail: (req, res) => {
+        // console.log(req.params.id);
+        // console.log(req.body);
+        // let recordId = mongoose.Types.ObjectId(req.params.id);
+        // Records.findById(recordId)
     },
 
     deleteRecord: (req, res) => {

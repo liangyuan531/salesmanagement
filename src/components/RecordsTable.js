@@ -22,7 +22,10 @@ class RecordsTable extends React.Component {
     }
 
     updateRecord = (id) => {
-        this.props.history.push('/updateRecord', {recordId: id});
+        this.props.history.push({
+            pathname: '/updateRecord', 
+            state: {recordId: id}
+        });
     }
 
     deleteRecord = (id) => {

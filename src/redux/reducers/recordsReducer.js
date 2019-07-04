@@ -1,7 +1,8 @@
-import { GET_ALL_RECORDS, ADD_RECORDS, DELETE_RECORDS } from '../actions/actionType'
+import { GET_ALL_RECORDS, ADD_RECORDS, DELETE_RECORDS, GET_RECORD } from '../actions/actionType'
 
 const initialState = {
-    records: []
+    records: [],
+    record: {}
 }
 
 export default function(state = initialState, action) {
@@ -10,6 +11,11 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 records: action.payload
+            }
+        case GET_RECORD: 
+            return {
+                ...state,
+                record: action.payload
             }
         case ADD_RECORDS:
             return {
