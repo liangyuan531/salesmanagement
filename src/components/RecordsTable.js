@@ -39,7 +39,7 @@ class RecordsTable extends React.Component {
         this.props.deleteRecord(id);
     }
     render() {
-        const records = this.props.records.records;
+        const records = this.props.records;
         console.log("records from props: ",records);
         if(this.state.toAddPage === true) {
             return <Redirect to='/addRecord' />
@@ -100,33 +100,6 @@ class RecordsTable extends React.Component {
                     )) : 'No Records'}
                   </tbody>
                 </table>
-                {/* <Modal show={this.state.show} onHide={this.handleClose}>
-                    <form onSubmit={this.handleSubmit(this.state.currentRecord)}>
-                        <h2>Update Record</h2>
-                        <div className="form-group">
-                          <input type="text" className='form-control'
-                          name="username" value={ this.state.currentRecord.username }  disabled />
-                        </div>
-                        <div className="form-group">
-                          <input type="text" className='form-control'
-                          name="productPrice" onChange={ this.handleInputChange } value={ this.state.productPrice } />
-                        </div>
-                        <div className="form-group">
-                          <input type="text" className='form-control'
-                          name="description" onChange={ this.handleInputChange } value={ this.state.description } />
-                        </div>
-                        <div className="form-group">
-                          <input type="file" className='form-control'
-                            name="imgURL" onChange={ this.handleInputChange } value={ this.state.imgURL } />
-                        </div>
-                        <button variant="secondary" onClick={this.handleClose}>
-                          Close
-                        </button>
-                        <button variant="primary" type="submit">
-                          Save Changes
-                        </button>
-                    </form>
-                </Modal> */}
             </>
         )
     }

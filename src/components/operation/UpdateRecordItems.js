@@ -9,16 +9,22 @@ class UpdateRecordItems extends React.Component {
         // let recordId = this.props.location.state.recordId
         // find record based on id
         // this.props.getRecordById(recordId)
+        this.state = {
+            recordId: this.props.location.state.recordId
+        }
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
     }
     render() {
+        console.log("update: record id: ", this.state.recordId);
+        
         //let items = this.props.record.items
         return(
             <div className="update-record">
-                <form onSubmit={this.handleSubmit}>
+                items
+                {/* <form onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">Item Name</label>
                     <div className="col-sm-10">
@@ -44,7 +50,7 @@ class UpdateRecordItems extends React.Component {
                     </div>
                   </div>     
                   <button type="submit" className="btn btn-primary">Submit</button>
-                </form>
+                </form> */}
             </div>
         )
     }
