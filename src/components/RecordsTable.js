@@ -7,10 +7,7 @@ class RecordsTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            toAddPage: false,
-            toUpdateItem: false,
-            toUpdatePostDetails: false,
-            recordId: ''
+            toAddPage: false
         }
     }
 
@@ -24,35 +21,13 @@ class RecordsTable extends React.Component {
         return date.slice(0,10);
     }
 
-<<<<<<< HEAD
+
     updateRecord = (id) => {
         this.props.history.push({
-            pathname: '/updateRecordItems', 
-            state: {recordId: id}
-        });
+                    pathname: '/updateRecord', 
+                    state: {recordId: id}
+                });
     }
-
-    // updateRecordPost = (id) => {
-    //     this.props.history.push({
-    //         pathname: '/updateRecordPostDetails', 
-    //         state: {recordId: id}
-    //     });
-    // }
-=======
-    updateRecordItems = (id) => {
-        this.setState({
-            toUpdateItem: true,
-            recordId: id
-        })
-    }
-
-    updateRecordPost = (id) => {
-        this.setState({
-            toUpdatePostDetails: true,
-            recordId: id
-        })
-    }
->>>>>>> 44d1cdd1fa54b423116411fe724f08786360bc15
 
     deleteRecord = (id) => {
         this.props.deleteRecord(id);
@@ -62,18 +37,6 @@ class RecordsTable extends React.Component {
         console.log("records from props: ",records);
         if(this.state.toAddPage === true) {
             return <Redirect to='/addRecord' />
-        }
-        if(this.state.toUpdateItem === true) {
-            return <Redirect to={{
-                        pathname: "/updateRecordItems",
-                        state: this.state.recordId
-                    }} />
-        }
-        if(this.state.toUpdatePostDetails === true) {
-            return <Redirect to={{
-                        pathname: "/updateRecordPostDetails",
-                        state: this.state.recordId
-                    }} />
         }
         return(
             <>
@@ -123,7 +86,6 @@ class RecordsTable extends React.Component {
                             <td>
                                 <div className="btn-group-vertical" role="group">
                                     <button type="button" className="btn btn-success" onClick={() => this.updateRecord(record._id)}>Update</button>
-                                    {/* <button type="button" className="btn btn-success" onClick={() => this.updateRecordPost(record._id)}>Update Post</button> */}
                                     <button type="button" className="btn btn-danger" onClick={() => this.deleteRecord(record._id)}>Delete</button>
                                 </div>
                             </td>
