@@ -7,7 +7,7 @@ import Records from './components/Records'
 import Report from './components/Report'
 import Error404 from './components/Error'
 import AddRecord from './components/operation/AddRecord'
-// import UpdateRecord from './components/operation/UpdateRecord'
+import UpdateRecord from './components/operation/UpdateRecord'
 import UpdateRecordItems from './components/operation/UpdateRecordItems'
 import UpdateRecordPostDetails from './components/operation/UpdateRecordPostDetails'
 
@@ -38,7 +38,7 @@ function App() {
                     <Route path="/records" component={Records}/>
                     <Route path="/report" component={Report}/>
                     <Route path="/addRecord" component={AddRecord} />
-                    {/* <Route path="/updateRecord" component={UpdateRecord} /> */}
+                    <Route path="/updateRecord" component={UpdateRecord} />
                     <Route paht="/updateRecordItems" component={UpdateRecordItems}/>
                     <Route paht="/updateRecordPostDetails" component={UpdateRecordPostDetails}/>
                     <Route component={Error404}/>

@@ -21,19 +21,19 @@ class RecordsTable extends React.Component {
         return date.slice(0,10);
     }
 
-    updateRecordItems = (id) => {
+    updateRecord = (id) => {
         this.props.history.push({
             pathname: '/updateRecordItems', 
             state: {recordId: id}
         });
     }
 
-    updateRecordPost = (id) => {
-        this.props.history.push({
-            pathname: '/updateRecordPostDetails', 
-            state: {recordId: id}
-        });
-    }
+    // updateRecordPost = (id) => {
+    //     this.props.history.push({
+    //         pathname: '/updateRecordPostDetails', 
+    //         state: {recordId: id}
+    //     });
+    // }
 
     deleteRecord = (id) => {
         this.props.deleteRecord(id);
@@ -91,8 +91,8 @@ class RecordsTable extends React.Component {
                             </td>
                             <td>
                                 <div className="btn-group-vertical" role="group">
-                                    <button type="button" className="btn btn-success" onClick={() => this.updateRecordItems(record._id)}>Update Items</button>
-                                    <button type="button" className="btn btn-success" onClick={() => this.updateRecordPost(record._id)}>Update Post</button>
+                                    <button type="button" className="btn btn-success" onClick={() => this.updateRecord(record._id)}>Update</button>
+                                    {/* <button type="button" className="btn btn-success" onClick={() => this.updateRecordPost(record._id)}>Update Post</button> */}
                                     <button type="button" className="btn btn-danger" onClick={() => this.deleteRecord(record._id)}>Delete</button>
                                 </div>
                             </td>
