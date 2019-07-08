@@ -7,7 +7,10 @@ class RecordsTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            toAddPage: false
+            toAddPage: false,
+            toUpdateItem: false,
+            toUpdatePostDetails: false,
+            recordId: ''
         }
     }
 
@@ -21,6 +24,7 @@ class RecordsTable extends React.Component {
         return date.slice(0,10);
     }
 
+<<<<<<< HEAD
     updateRecord = (id) => {
         this.props.history.push({
             pathname: '/updateRecordItems', 
@@ -34,6 +38,21 @@ class RecordsTable extends React.Component {
     //         state: {recordId: id}
     //     });
     // }
+=======
+    updateRecordItems = (id) => {
+        this.setState({
+            toUpdateItem: true,
+            recordId: id
+        })
+    }
+
+    updateRecordPost = (id) => {
+        this.setState({
+            toUpdatePostDetails: true,
+            recordId: id
+        })
+    }
+>>>>>>> 44d1cdd1fa54b423116411fe724f08786360bc15
 
     deleteRecord = (id) => {
         this.props.deleteRecord(id);
@@ -43,6 +62,18 @@ class RecordsTable extends React.Component {
         console.log("records from props: ",records);
         if(this.state.toAddPage === true) {
             return <Redirect to='/addRecord' />
+        }
+        if(this.state.toUpdateItem === true) {
+            return <Redirect to={{
+                        pathname: "/updateRecordItems",
+                        state: this.state.recordId
+                    }} />
+        }
+        if(this.state.toUpdatePostDetails === true) {
+            return <Redirect to={{
+                        pathname: "/updateRecordPostDetails",
+                        state: this.state.recordId
+                    }} />
         }
         return(
             <>
