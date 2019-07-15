@@ -9,7 +9,7 @@ class UpdateRecordPostDetails extends React.Component {
         // let recordId = this.props.location.state.recordId
         // console.log("update post detail: ", recordId);
         this.state = {
-          recordId: this.props.location.state.recordId
+         
         }
         // find record based on id
         // this.props.getRecordById(recordId)
@@ -19,11 +19,12 @@ class UpdateRecordPostDetails extends React.Component {
         e.preventDefault();
     }
     render() {
-        console.log("update post detail: ", this.state.recordId);
+        //console.log("update post detail: ", this.state.recordId);
         // let postDetail = this.props.record.postDetail
         return(
-            <div className="update-record">
-                <form onSubmit={this.handleSubmit}>
+            <>
+              post details
+                {/* <form onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">Receiver Name</label>
                     <div className="col-sm-10">
@@ -43,8 +44,8 @@ class UpdateRecordPostDetails extends React.Component {
                     </div>
                   </div>    
                   <button type="submit" className="btn btn-primary">Submit</button>
-                </form>
-            </div>
+                </form> */}
+            </>
         )
     }
 }
