@@ -5,46 +5,52 @@ import { getRecordById } from '../../redux/actions/recordsAction'
 class UpdateRecordPostDetails extends React.Component {
     constructor(props) {
         super(props);
-        // get history parms (recordId)
-        // let recordId = this.props.location.state.recordId
-        // console.log("update post detail: ", recordId);
         this.state = {
-         
+          record: this.props.getRecordById(this.props.recordId)
         }
-        // find record based on id
-        // this.props.getRecordById(recordId)
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
     }
+    change = (e) => {
+
+    }
     render() {
-        //console.log("update post detail: ", this.state.recordId);
-        // let postDetail = this.props.record.postDetail
+        let post = this.props.record.postDetail;
         return(
             <>
-              post details
-                {/* <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit}>
+                  {post ? 
+                  <>
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">Receiver Name</label>
                     <div className="col-sm-10">
-                      <input type="text" name="receiver" className="form-control" id="receiver" />
+                      <input type="text" name="receiver" className="form-control" 
+                              id="receiver" value={post.receiver}
+                              onChange={this.change}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">Phone Number</label>
                     <div className="col-sm-10">
-                      <input type="text" name="phoneNo" className="form-control" id="phoneNo" />
+                      <input type="text" name="phoneNo" className="form-control" 
+                              id="phoneNo" value={post.phoneNo}
+                              onChange={this.change}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">Address</label>
                     <div className="col-sm-10">
-                      <input type="text" name="address" className="form-control" id="address" />
+                      <input type="text" name="address" className="form-control" 
+                              id="address" value={post.address}
+                              onChange={this.change}/>
                     </div>
                   </div>    
-                  <button type="submit" className="btn btn-primary">Submit</button>
-                </form> */}
+                  <button type="submit" className="btn btn-primary">Update Details</button>
+                  </>
+                  : <></>}
+                </form>
             </>
         )
     }
