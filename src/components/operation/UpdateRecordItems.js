@@ -37,7 +37,7 @@ class UpdateRecordItems extends React.Component {
                         <label className="col-sm-2 col-form-label">Item Name</label>
                         <div className="col-sm-10">
                           <input type="text" name="itemName" className="form-control" 
-                                  id="itemName" value={item.itemName}
+                                  id="itemName" defaultValue={item.itemName}
                                   onChange={this.handleInputChange}/>
                         </div>
                       </div>
@@ -45,7 +45,7 @@ class UpdateRecordItems extends React.Component {
                         <label className="col-sm-2 col-form-label">Purchase Price</label>
                         <div className="col-sm-10">
                           <input type="text" name="purchasePrice" className="form-control" 
-                                  id="purchasePrice" value={item.purchasePrice}
+                                  id="purchasePrice" defaultValue={item.purchasePrice}
                                   onChange={this.handleInputChange}/>
                         </div>
                       </div>
@@ -53,7 +53,7 @@ class UpdateRecordItems extends React.Component {
                         <label className="col-sm-2 col-form-label">Sale Price</label>
                         <div className="col-sm-10">
                           <input type="text" name="salePrice" className="form-control" 
-                                  id="salePrice" value={item.salePrice}
+                                  id="salePrice" defaultValue={item.salePrice}
                                   onChange={this.handleInputChange}/>
                         </div>
                       </div>
@@ -61,7 +61,7 @@ class UpdateRecordItems extends React.Component {
                         <label className="col-sm-2 col-form-label">Amount</label>
                         <div className="col-sm-10">
                           <input type="text" name="amount" className="form-control" 
-                                  id="amount" value={item.amount}
+                                  id="amount" defaultValue={item.amount}
                                   onChange={this.handleInputChange}/>
                         </div>
                       </div>        

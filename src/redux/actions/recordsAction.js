@@ -57,3 +57,8 @@ export const deleteRecord = (id) => dispatch => {
             console.log(err);
         })
 }
+
+export const updatePost = (post) => dispatch =>{
+    console.log('post action: ', post);
+    //axios.put(`${URL}/records/update/postDetail/${post.}`)
+}
