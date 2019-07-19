@@ -19,7 +19,7 @@ class AddRecord extends React.Component {
     handleSubmit = (e) => {
       e.preventDefault();
       const data = new FormData(e.target);
-      const records = [...data.entries()]
+      const records = [...data.entries()];
       this.props.addRecord(records);
       this.props.history.push('/records');
     }

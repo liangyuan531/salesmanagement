@@ -6,15 +6,29 @@ class UpdateRecordPostDetails extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          record: this.props.getRecordById(this.props.recordId)
+          record: this.props.getRecordById(this.props.recordId),
+          receiver: '',
+          phoneNo: '',
+          address: ''
         }
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
+        const data = new FormData(e.target);
+        const post = [...data.entries()];
+        console.log(`post: ${post}`);
+        const post2 = {
+          receiver: this.state.receiver,
+          phoneNo: this.state.phoneNo,
+          address: this.state.address
+        }
+        console.log(`post2: ${post2}`);
     }
-    change = (e) => {
-
+    handleInputChange = (e) => {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
     }
     render() {
         let post = this.props.record.postDetail;
@@ -28,7 +42,7 @@ class UpdateRecordPostDetails extends React.Component {
                     <div className="col-sm-10">
                       <input type="text" name="receiver" className="form-control" 
                               id="receiver" value={post.receiver}
-                              onChange={this.change}/>
+                              onChange={this.handleInputChange}/>
                     </div>
                   </div>
                   <div className="form-group">
@@ -36,7 +50,7 @@ class UpdateRecordPostDetails extends React.Component {
                     <div className="col-sm-10">
                       <input type="text" name="phoneNo" className="form-control" 
                               id="phoneNo" value={post.phoneNo}
-                              onChange={this.change}/>
+                              onChange={this.handleInputChange}/>
                     </div>
                   </div>
                   <div className="form-group">
@@ -44,7 +58,7 @@ class UpdateRecordPostDetails extends React.Component {
                     <div className="col-sm-10">
                       <input type="text" name="address" className="form-control" 
                               id="address" value={post.address}
-                              onChange={this.change}/>
+                              onChange={this.handleInputChange}/>
                     </div>
                   </div>    
                   <button type="submit" className="btn btn-primary">Update Details</button>
