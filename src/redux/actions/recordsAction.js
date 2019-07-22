@@ -1,4 +1,4 @@
-import { GET_ALL_RECORDS, ADD_RECORDS, DELETE_RECORDS, GET_RECORD } from './actionType'
+import { GET_ALL_RECORDS, ADD_RECORDS, DELETE_RECORDS, GET_RECORD, UPDATE_POST } from './actionType'
 import axios from 'axios'
 import { URL } from './reqURL'
 
@@ -58,7 +58,17 @@ export const deleteRecord = (id) => dispatch => {
         })
 }
 
-export const updatePost = (post) => dispatch =>{
+export const updatePost = (recordId, post) => dispatch =>{
     console.log('post action: ', post);
-    //axios.put(`${URL}/records/update/postDetail/${post.}`)
+    axios.put(`${URL}/records/update/postDetail/${recordId}`, post)
+        .then(res=>{
+            console.log('action update post res data: ', res.data);
+            dispatch({
+                type: UPDATE_POST,
+                payload: res.data
+            })
+        })
+        .catch(err=>{
+            console.log(err);
+        })
 }

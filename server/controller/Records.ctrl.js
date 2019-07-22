@@ -141,17 +141,37 @@ module.exports = {
     },
 
     updateRecordItems: (req, res) => {
-        // console.log(req.params.id);
-        // console.log(req.body);
-        // let recordId = mongoose.Types.ObjectId(req.params.id);
+        // let recordId = req.params.id;
+        // let postData = req.body
+        // console.log(recordId);
+        // console.log(postData);
         // Records.findById(recordId)
     },
 
     updateRecordPostDetail: (req, res) => {
-        // console.log(req.params.id);
-        // console.log(req.body);
-        // let recordId = mongoose.Types.ObjectId(req.params.id);
+        let recordId = req.params.id;
+        let postData = req.body
+        console.log(recordId);
+        console.log(postData);
         // Records.findById(recordId)
+        // update post details
+        PostDetails.findOneAndUpdate(
+                postData._id, 
+                {
+                    receiver: postData.receiver,
+                    phoneNo: postData.phoneNo,
+                    address: postData.address
+                }).exec((err, post) => res.send(post));
+        // get updated record
+        // Records.findById(recordId)
+        //     .populate('user')
+        //     .populate('items')
+        //     .populate('postDetail')
+        //     .exec((err, record) => {
+        //         console.log("updated record: ", record);
+        //         if(err) res.send('cannot update record: ', recordId);
+        //         res.send(record)
+        //     })
     },
 
     deleteRecord: (req, res) => {

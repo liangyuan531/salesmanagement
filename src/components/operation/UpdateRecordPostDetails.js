@@ -7,6 +7,7 @@ class UpdateRecordPostDetails extends React.Component {
         super(props);
         // call getRecordById to get current record
         this.props.getRecordById(this.props.recordId);
+        this.postID = React.createRef();
         this.state = {
           //record: this.props.getRecordById(this.props.recordId),
           receiver: '',
@@ -24,10 +25,10 @@ class UpdateRecordPostDetails extends React.Component {
           receiver: this.state.receiver,
           phoneNo: this.state.phoneNo,
           address: this.state.address,
-          postId: e.target.value
+          postId: this.postID.current.value
         }
         //console.log(`post2: ${post}`);
-        this.props.updatePost(post);
+        this.props.updatePost(this.props.recordId, post);
     }
     handleInputChange = (e) => {
       this.setState({
@@ -41,7 +42,7 @@ class UpdateRecordPostDetails extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                   {post ? 
                   <>
-                  <input type="hidden" name="postId" value={post._id}/>
+                  <input type="hidden" name="postId" value={post._id} ref={this.postID}/>
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">Receiver Name</label>
                     <div className="col-sm-10">

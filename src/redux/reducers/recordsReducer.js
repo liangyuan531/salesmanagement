@@ -1,4 +1,4 @@
-import { GET_ALL_RECORDS, ADD_RECORDS, DELETE_RECORDS, GET_RECORD } from '../actions/actionType'
+import { GET_ALL_RECORDS, ADD_RECORDS, DELETE_RECORDS, GET_RECORD, UPDATE_POST } from '../actions/actionType'
 
 const initialState = {
     records: [],
@@ -24,6 +24,17 @@ export default function(state = initialState, action) {
         case DELETE_RECORDS: 
             return {
                 records: [...state.records].filter(record => record._id !== action.payload)
+            }
+        case UPDATE_POST:
+            return {
+                ...state,
+                // update post details of related record
+                records: [...state.records].map(record=>{
+                    if(record.postDetails._id === action.payload._id){
+                        record.postDetails = action.payload
+                    }
+                    return record
+                })
             }
         default:
             return state;
