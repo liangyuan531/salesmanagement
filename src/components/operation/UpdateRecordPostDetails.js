@@ -8,6 +8,9 @@ class UpdateRecordPostDetails extends React.Component {
         // call getRecordById to get current record
         this.props.getRecordById(this.props.recordId);
         this.postID = React.createRef();
+        this._receiver = React.createRef();
+        this._phoneNo = React.createRef();
+        this._address = React.createRef();
         this.state = {
           //record: this.props.getRecordById(this.props.recordId),
           receiver: '',
@@ -22,9 +25,9 @@ class UpdateRecordPostDetails extends React.Component {
         // const post = [...data.entries()];
         // console.log(`post: ${post}`);
         const post = {
-          receiver: this.state.receiver,
-          phoneNo: this.state.phoneNo,
-          address: this.state.address,
+          receiver: this.state.receiver ? this.state.receiver : this._receiver.current.value,
+          phoneNo: this.state.phoneNo ? this.state.phoneNo : this._phoneNo.current.value,
+          address: this.state.address ? this.state.address : this._address.current.value,
           postId: this.postID.current.value
         }
         //console.log(`post2: ${post}`);
@@ -48,7 +51,8 @@ class UpdateRecordPostDetails extends React.Component {
                     <div className="col-sm-10">
                       <input type="text" name="receiver" className="form-control" id="receiver" 
                               onChange={this.handleInputChange}
-                              defaultValue={post.receiver}/>
+                              defaultValue={post.receiver}
+                              ref={this._receiver}/>
                     </div>
                   </div>
                   <div className="form-group">
@@ -56,7 +60,8 @@ class UpdateRecordPostDetails extends React.Component {
                     <div className="col-sm-10">
                       <input type="text" name="phoneNo" className="form-control" id="phoneNo"
                               onChange={this.handleInputChange}
-                              defaultValue={post.phoneNo}/>
+                              defaultValue={post.phoneNo}
+                              ref={this._phoneNo}/>
                     </div>
                   </div>
                   <div className="form-group">
@@ -64,7 +69,8 @@ class UpdateRecordPostDetails extends React.Component {
                     <div className="col-sm-10">
                       <input type="text" name="address" className="form-control" id="address" 
                               onChange={this.handleInputChange}
-                              defaultValue={post.address}/>
+                              defaultValue={post.address}
+                              ref={this._address}/>
                     </div>
                   </div>    
                   <button type="submit" className="btn btn-primary">Update Details</button>

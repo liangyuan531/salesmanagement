@@ -151,17 +151,21 @@ module.exports = {
     updateRecordPostDetail: (req, res) => {
         let recordId = req.params.id;
         let postData = req.body
-        console.log(recordId);
-        console.log(postData);
+        console.log('controller update recordId: ', recordId);
+        console.log('controller update postData: ', postData);
         // Records.findById(recordId)
         // update post details
         PostDetails.findOneAndUpdate(
-                postData._id, 
+                postData.postId, 
                 {
                     receiver: postData.receiver,
                     phoneNo: postData.phoneNo,
                     address: postData.address
-                }).exec((err, post) => res.send(post));
+                }).exec((err, post) => {
+                    console.log('controller post: ', post);
+                    
+                    res.send(post)}
+                );
         // get updated record
         // Records.findById(recordId)
         //     .populate('user')

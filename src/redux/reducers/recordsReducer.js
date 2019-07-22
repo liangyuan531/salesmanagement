@@ -29,10 +29,10 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 // update post details of related record
-                records: [...state.records].map(record=>{
-                    if(record.postDetails._id === action.payload._id){
-                        record.postDetails = action.payload
-                    }
+                records: [...state.records].map(record=>{                               
+                    if(record.postDetail._id === action.payload.postId){
+                        record.postDetail = action.payload
+                    }             
                     return record
                 })
             }
