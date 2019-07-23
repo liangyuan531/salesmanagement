@@ -1,0 +1,63 @@
+@import 'nav';
+
+.container-fluid {
+    width: 100%;
+    padding: {
+        right: 15px;
+        left: 15px;
+    }
+    margin: {
+        right: auto;
+        left: auto;
+    }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: {
+        right: -15px;
+        left: -15px;
+    }
+}
+
+main {
+    margin-top: 50px;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+%shared-marginTop {
+    margin-top: 10mm;
+}
+.records-table {
+    @extend %shared-marginTop;
+}
+.add-record {
+    @extend %shared-marginTop;
+} 
+.update-record {
+    @extend %shared-marginTop;
+}
+
+#addItemBtn {
+    margin: {
+        left: 50em;
+        top: 1em;
+    }
+}
+
+.form-row {
+    margin-bottom: 5mm;
+}
+
+#signout, #deleteInput {
+    background-color: transparent;
+    border: none;
+}
+
+.update-btn {
+    margin: auto;
+}
