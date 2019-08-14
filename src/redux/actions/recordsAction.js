@@ -63,6 +63,7 @@ export const updatePost = (recordId, post) => dispatch =>{
     axios.put(`${URL}/records/update/postDetail/${recordId}`, post)
         .then(res=>{
             console.log('action update post res data: ', res.data);
+            alert('Update successfully');
             dispatch({
                 type: UPDATE_POST,
                 payload: res.data

@@ -15,8 +15,8 @@ import UpdateRecordPostDetails from './components/operation/UpdateRecordPostDeta
 import store from './redux/store'
 import { Provider } from 'react-redux'
 
-import './App.css'
-import './stylesheets/style.css'
+import './App.scss'
+import './stylesheets/style.scss'
 
 function App() {
   return (

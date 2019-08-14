@@ -162,20 +162,9 @@ module.exports = {
                     phoneNo: postData.phoneNo,
                     address: postData.address
                 }).exec((err, post) => {
-                    console.log('controller post: ', post);
-                    
-                    res.send(post)}
-                );
-        // get updated record
-        // Records.findById(recordId)
-        //     .populate('user')
-        //     .populate('items')
-        //     .populate('postDetail')
-        //     .exec((err, record) => {
-        //         console.log("updated record: ", record);
-        //         if(err) res.send('cannot update record: ', recordId);
-        //         res.send(record)
-        //     })
+                    // console.log('controller post: ', post);
+                    res.send(post);
+                });
     },
 
     deleteRecord: (req, res) => {

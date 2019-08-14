@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect, withRouter } from 'react-router-dom'
 import { getRecordById, updatePost } from '../../redux/actions/recordsAction'
 
 class UpdateRecordPostDetails extends React.Component {
@@ -32,6 +33,8 @@ class UpdateRecordPostDetails extends React.Component {
         }
         //console.log(`post2: ${post}`);
         this.props.updatePost(this.props.recordId, post);
+        {/* <Redirect to="records" /> */}
+        this.props.history.push('records');
     }
     handleInputChange = (e) => {
       this.setState({
@@ -86,4 +89,4 @@ const mapStateToProps = (state) => ({
     record: state.records.record
 })
 
-export default connect(mapStateToProps, {getRecordById, updatePost})(UpdateRecordPostDetails);
+export default withRouter( connect(mapStateToProps, {getRecordById, updatePost})(UpdateRecordPostDetails) );
