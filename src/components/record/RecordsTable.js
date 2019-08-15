@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { deleteRecord } from '../redux/actions/recordsAction'
+import { deleteRecord } from '../../redux/actions/recordsAction'
 
 class RecordsTable extends React.Component {
     constructor(props) {
@@ -34,14 +34,13 @@ class RecordsTable extends React.Component {
     }
     render() {
         const records = this.props.records;
-        console.log("records from props: ",records);
         if(this.state.toAddPage === true) {
             return <Redirect to='/addRecord' />
         }
         return(
             <>
                 <div className="btn-group" role="group">
-                  <button type="button" className="btn btn-danger">Delete</button>
+                  {/* <button type="button" className="btn btn-danger">Delete</button> */}
                   <button type="button" className="btn btn-primary" onClick={this.addRecord}>Add</button>
                 </div>
                 <table className="table">

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { getRecordById, updatePost } from '../../redux/actions/recordsAction'
 
 class UpdateRecordPostDetails extends React.Component {
@@ -8,7 +8,7 @@ class UpdateRecordPostDetails extends React.Component {
         super(props);
         // call getRecordById to get current record
         this.props.getRecordById(this.props.recordId);
-        this.postID = React.createRef();
+        this._postId = React.createRef();
         this._receiver = React.createRef();
         this._phoneNo = React.createRef();
         this._address = React.createRef();
@@ -29,11 +29,10 @@ class UpdateRecordPostDetails extends React.Component {
           receiver: this.state.receiver ? this.state.receiver : this._receiver.current.value,
           phoneNo: this.state.phoneNo ? this.state.phoneNo : this._phoneNo.current.value,
           address: this.state.address ? this.state.address : this._address.current.value,
-          postId: this.postID.current.value
+          postId: this._postId.current.value
         }
         //console.log(`post2: ${post}`);
         this.props.updatePost(this.props.recordId, post);
-        {/* <Redirect to="records" /> */}
         this.props.history.push('records');
     }
     handleInputChange = (e) => {
@@ -47,8 +46,8 @@ class UpdateRecordPostDetails extends React.Component {
             <>
                 <form onSubmit={this.handleSubmit}>
                   {post ? 
-                  <>
-                  <input type="hidden" name="postId" value={post._id} ref={this.postID}/>
+                  <React.Fragment key={post._id}>
+                  <input type="hidden" name="postId" value={post._id} ref={this._postId}/>
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">Receiver Name</label>
                     <div className="col-sm-10">
@@ -77,7 +76,7 @@ class UpdateRecordPostDetails extends React.Component {
                     </div>
                   </div>    
                   <button type="submit" className="btn btn-primary">Update Details</button>
-                  </>
+                  </React.Fragment>
                   : <></>}
                 </form>
             </>

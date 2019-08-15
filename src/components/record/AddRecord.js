@@ -16,13 +16,7 @@ class AddRecord extends React.Component {
           itemInputs: [...this.state.itemInputs, newInput]
       })
     }
-    handleSubmit = (e) => {
-      e.preventDefault();
-      const data = new FormData(e.target);
-      const records = [...data.entries()];
-      this.props.addRecord(records);
-      this.props.history.push('/records');
-    }
+
     deleteInput = (id) => {
       this.setState({
         itemInputs: this.state.itemInputs.filter(input=>{
@@ -30,6 +24,15 @@ class AddRecord extends React.Component {
         })
       })
     }
+    
+    handleSubmit = (e) => {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      const records = [...data.entries()];
+      this.props.addRecord(records);
+      this.props.history.push('/records');
+    }
+    
     render() {
         return(
             <div className="add-record">

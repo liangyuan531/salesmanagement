@@ -8,14 +8,11 @@ const validateInput = require('../validation/order.validation')
 
 module.exports = {
     getAllRecords: (req, res) => {
-        console.log("records controller ========================");
         Records.find()
-                //.populate({path: 'user', populate: {path: 'postDetails'}})
                 .populate('user')
                 .populate('items')
                 .populate('postDetail')
                 .exec((err, records) => {
-                    console.log('records: ', records);
                     if(err) res.send('cannot find records');
                     res.send(records);
                 });
@@ -67,7 +64,6 @@ module.exports = {
         // process items, add them into an array
         for(let i=5;i<data.length;i++) {
             item[data[i][0]] = data[i][1];
-            //console.log('item: ', item);
             if(data[i][0] === 'amount'){
                 items.push(item);
                 item = {}
@@ -75,7 +71,7 @@ module.exports = {
         }
         // add items to record
         record['items'] = items;
-        //console.log('proceed record: ', record);
+        /* validate input */
         //let {orderErr, isValid} = validateOrderInput(record);
         // if validation not passing, return error
         // if(!isValid) {
@@ -149,20 +145,19 @@ module.exports = {
     },
 
     updateRecordPostDetail: (req, res) => {
-        let recordId = req.params.id;
+        // let recordId = req.params.id;
         let postData = req.body
-        console.log('controller update recordId: ', recordId);
-        console.log('controller update postData: ', postData);
-        // Records.findById(recordId)
         // update post details
         PostDetails.findOneAndUpdate(
-                postData.postId, 
+                {_id: postData.postId}, 
                 {
                     receiver: postData.receiver,
                     phoneNo: postData.phoneNo,
                     address: postData.address
-                }).exec((err, post) => {
-                    // console.log('controller post: ', post);
+                },
+                {new: true})
+                .exec((err, post)=>{
+                    if(err) res.send({'message':'-1'})
                     res.send(post);
                 });
     },

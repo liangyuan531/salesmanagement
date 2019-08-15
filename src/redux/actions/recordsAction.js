@@ -59,15 +59,17 @@ export const deleteRecord = (id) => dispatch => {
 }
 
 export const updatePost = (recordId, post) => dispatch =>{
-    console.log('post action: ', post);
     axios.put(`${URL}/records/update/postDetail/${recordId}`, post)
         .then(res=>{
-            console.log('action update post res data: ', res.data);
-            alert('Update successfully');
-            dispatch({
-                type: UPDATE_POST,
-                payload: res.data
-            })
+            if(!res.data.message){
+                alert('Update successfully');
+                dispatch({
+                    type: UPDATE_POST,
+                    payload: res.data
+                })
+            }else{
+                alert('Update failed');
+            }
         })
         .catch(err=>{
             console.log(err);

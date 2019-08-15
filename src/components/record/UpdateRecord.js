@@ -11,7 +11,7 @@ class UpdateRecord extends React.Component {
         }
     }
     render() {
-        console.log("update id: ", this.state.id);
+        console.log("update record id: ", this.state.id);
         return(
             <div className="update-record">
                 <UpdateRecordItems recordId={this.state.id}/>

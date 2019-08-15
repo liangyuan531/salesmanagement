@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 5000;
+// const port = process.env.PORT || 5000;
 // prevent cross-origin request errors
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -9,10 +9,10 @@ const cloudinary = require('cloudinary');
 // use mongoose to connect database
 const mongoose = require('mongoose');
 const routes = require('./routes/');
-const router = express.Router()
+const router = express.Router();
 
-const url = "mongodb+srv://admin:ezGqnXDQyIpPDrCq@cluster0-a0kj5.mongodb.net/management?retryWrites=true";
-mongoose.connect(url,{ useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
+const config = require('./config');
+mongoose.connect(config.db.url,{ useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
 .then(() => { console.log(`Succesfully Connected to the Mongodb Database`)})
 .catch(() => { console.log(`Error connecting to the database`)})
 
@@ -30,6 +30,6 @@ routes(router);
 app.use('/api', router);
 
 //start server
-app.listen(port, (req, res) => {
-  console.log( `server listening on port: ${port}`);
+app.listen(config.app.port, (req, res) => {
+  console.log( `server listening on port: ${config.app.port}`);
 })
