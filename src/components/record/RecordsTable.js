@@ -32,11 +32,24 @@ class RecordsTable extends React.Component {
     deleteRecord = (id) => {
         this.props.deleteRecord(id);
     }
+
+    computeTotal = (records) => {
+        let total = 0;
+        for(let record of records) {
+            let subTotal = 0;
+            record.items.map(item=>{
+                subTotal += item.amount * item.salePrice;
+            })
+            total += subTotal;
+        }
+        return total;
+    }
     render() {
         const records = this.props.records;
         if(this.state.toAddPage === true) {
             return <Redirect to='/addRecord' />
         }
+        let total = this.computeTotal(records);
         return(
             <>
                 <div className="btn-group" role="group">
@@ -60,37 +73,45 @@ class RecordsTable extends React.Component {
                       </tr>
                     </thead>
                   <tbody>
-                    {records ? records.map(record => (
-                        <tr key={record._id}>
-                            <td>{this.dateFormat(record.date)}</td>
-                            <td>{record.user.username}</td>
-                            <td>{record.user.isVip ? 'Yes' : 'No'}</td>
-                            <td>{record.postDetail.receiver}</td>
-                            <td>{record.postDetail.phoneNo}</td>
-                            <td>{record.postDetail.address}</td> 
-                            <td colSpan="4">
-                                <table className="table">
-                                    <tbody>
-                                        {record.items.map(item =>(
-                                            <tr key={item._id}>
-                                                <td align="left">{item.itemName}</td>
-                                                <td align="left">{item.salePrice}</td>
-                                                <td align="left">{item.amount}</td>
-                                                <td align="left">{item.purchasePrice}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </td>
-                            <td>
-                                <div className="btn-group-vertical" role="group">
-                                    <button type="button" className="btn btn-success" onClick={() => this.updateRecord(record._id)}>Update</button>
-                                    <button type="button" className="btn btn-danger" onClick={() => this.deleteRecord(record._id)}>Delete</button>
-                                </div>
-                            </td>
+                    {records ? 
+                    (<React.Fragment>
+                        {records.map(record => (
+                            <tr key={record._id}>
+                                <td>{this.dateFormat(record.date)}</td>
+                                <td>{record.user.username}</td>
+                                <td>{record.user.isVip ? 'Yes' : 'No'}</td>
+                                <td>{record.postDetail.receiver}</td>
+                                <td>{record.postDetail.phoneNo}</td>
+                                <td>{record.postDetail.address}</td> 
+                                <td colSpan="4">
+                                    <table className="table">
+                                        <tbody>
+                                            {record.items.map(item =>(
+                                                <tr key={item._id}>
+                                                    <td align="left">{item.itemName}</td>
+                                                    <td align="left">{item.salePrice}</td>
+                                                    <td align="left">{item.amount}</td>
+                                                    <td align="left">{item.purchasePrice}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td>
+                                    <div className="btn-group-vertical" role="group">
+                                        <button type="button" className="btn btn-success" onClick={() => this.updateRecord(record._id)}>Update</button>
+                                        <button type="button" className="btn btn-danger" onClick={() => this.deleteRecord(record._id)}>Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                        <tr>
+                          <td>Total</td>
+                          <td>${total}</td>
                         </tr>
-                    )) : 'No Records'}
-                  </tbody>
+                    </React.Fragment>)
+                    : ''}
+                    </tbody>
                 </table>
             </>
         )

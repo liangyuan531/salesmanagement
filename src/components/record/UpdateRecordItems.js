@@ -46,7 +46,6 @@ class UpdateRecordItems extends React.Component {
         return(
             <>
                 <form onSubmit={this.handleSubmit}>
-                  
                   {items ? 
                     (<React.Fragment>
                       {items.map(item => (
