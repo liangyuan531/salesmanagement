@@ -47,35 +47,35 @@ class UpdateRecordPostDetails extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                   {post ? 
                   <React.Fragment key={post._id}>
-                  <input type="hidden" name="postId" value={post._id} ref={this._postId}/>
-                  <div className="form-group">
-                    <label className="col-sm-2 col-form-label">Receiver Name</label>
-                    <div className="col-sm-10">
-                      <input type="text" name="receiver" className="form-control" id="receiver" 
-                              onChange={this.handleInputChange}
-                              defaultValue={post.receiver}
-                              ref={this._receiver}/>
+                    <input type="hidden" name="postId" value={post._id} ref={this._postId}/>
+                    <div className="form-group">
+                      <label className="col-sm-2 col-form-label">Receiver Name</label>
+                      <div className="col-sm-10">
+                        <input type="text" name="receiver" className="form-control" id="receiver" 
+                                onChange={this.handleInputChange}
+                                defaultValue={post.receiver}
+                                ref={this._receiver}/>
+                      </div>
                     </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-sm-2 col-form-label">Phone Number</label>
-                    <div className="col-sm-10">
-                      <input type="text" name="phoneNo" className="form-control" id="phoneNo"
-                              onChange={this.handleInputChange}
-                              defaultValue={post.phoneNo}
-                              ref={this._phoneNo}/>
+                    <div className="form-group">
+                      <label className="col-sm-2 col-form-label">Phone Number</label>
+                      <div className="col-sm-10">
+                        <input type="text" name="phoneNo" className="form-control" id="phoneNo"
+                                onChange={this.handleInputChange}
+                                defaultValue={post.phoneNo}
+                                ref={this._phoneNo}/>
+                      </div>
                     </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-sm-2 col-form-label">Address</label>
-                    <div className="col-sm-10">
-                      <input type="text" name="address" className="form-control" id="address" 
-                              onChange={this.handleInputChange}
-                              defaultValue={post.address}
-                              ref={this._address}/>
-                    </div>
-                  </div>    
-                  <button type="submit" className="btn btn-primary">Update Details</button>
+                    <div className="form-group">
+                      <label className="col-sm-2 col-form-label">Address</label>
+                      <div className="col-sm-10">
+                        <input type="text" name="address" className="form-control" id="address" 
+                                onChange={this.handleInputChange}
+                                defaultValue={post.address}
+                                ref={this._address}/>
+                      </div>
+                    </div>    
+                    <button type="submit" className="btn btn-primary">Update Details</button>
                   </React.Fragment>
                   : <></>}
                 </form>

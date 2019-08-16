@@ -13,8 +13,14 @@ module.exports = {
                 .populate('items')
                 .populate('postDetail')
                 .exec((err, records) => {
-                    if(err) res.send('cannot find records');
-                    res.send(records);
+                    if(err) res.status(400).send({
+                        "succsss": false,
+                        "message": `cannot find record with id: ${recordId}`
+                    });
+                    res.status(200).send({
+                        "success": true,
+                        "records": records
+                    });
                 });
     },
     getRecordById: (req, res) => {
@@ -25,8 +31,14 @@ module.exports = {
                 .populate('postDetail')
                 .exec((err, record) => {
                     console.log("find record by id: ", record);
-                    if(err) res.send('cannot find record with id: ', recordId);
-                    res.send(record)
+                    if(err) res.status(400).send({
+                        "succsss": false,
+                        "message": `cannot find record with id: ${recordId}`
+                    });
+                    res.status(200).send({
+                        "success": true,
+                        "record": record
+                    })
                 })
     },
     /*
@@ -94,7 +106,10 @@ module.exports = {
                     username: record.username,
                     isVip: record.isVip
                 }).save((err, user) => {
-                    if(err) res.send('cannot create user');
+                    if(err) res.status(400).send({
+                        "success": false,
+                        "message": 'cannot create user'
+                    });
                     crateNewRecords(user, record);
                 });
             }
@@ -132,16 +147,50 @@ module.exports = {
             // record add postdetails
             newRecord.addPostDetail(postDetail._id)
             console.log('record: ', newRecord);
-            return res.send(newRecord);
+            return res.status(200).send({
+                "success": true,
+                "record": newRecord
+            });
         }
     },
 
     updateRecordItems: (req, res) => {
-        // let recordId = req.params.id;
-        // let postData = req.body
-        // console.log(recordId);
-        // console.log(postData);
-        // Records.findById(recordId)
+        let recordId = req.params.id;
+        let itemsData = req.body
+        // dealing itemsData
+        let items = [];
+        for(let i=0;i<itemsData.length;i+=5) {
+            let temp = {};
+            temp['itemId'] = itemsData[i][1];
+            temp['itemName'] = itemsData[i+1][1];
+            temp['purchasePrice'] = itemsData[i+2][1];
+            temp['salePrice'] = itemsData[i+3][1];
+            temp['amount'] = itemsData[i+4][1];
+            items.push(temp);
+        }
+        
+        let promise = items.map(item=>(
+            Item.findOneAndUpdate(
+                {_id: item.itemId},
+                {
+                    itemName: item.itemName,
+                    purchasePrice: item.purchasePrice,
+                    salePrice: item.salePrice,
+                    amount: Number(item.amount)
+                }
+            ).exec()
+        ))
+        if(promise.length === items.length){
+            res.status(200).send({
+                "success": true,
+                "items": items
+            })
+        }else{
+            res.status(400).send({
+                "success": false,
+                "message": "update items failed"
+            })
+        }
     },
 
     updateRecordPostDetail: (req, res) => {
@@ -157,8 +206,14 @@ module.exports = {
                 },
                 {new: true})
                 .exec((err, post)=>{
-                    if(err) res.send({'message':'-1'})
-                    res.send(post);
+                    if(err) res.status(400).send({
+                        "success": false,
+                        "message": "update post details failed"
+                    })
+                    res.status(200).send({
+                        "success": true,
+                        "post_details": post
+                    });
                 });
     },
 
@@ -169,7 +224,10 @@ module.exports = {
                 .exec((err, record) => {
                     record.items.map(item => {
                         Item.findByIdAndRemove(item._id, err => {
-                            if(err) res.send({'message': '-1'})
+                            if(err) res.status(400).send({
+                                "success": false,
+                                "message": `delete item: ${item._id} failed`
+                            })
                         });
                     })
                 })
@@ -177,14 +235,23 @@ module.exports = {
         Records.findById(recordId)
                 .exec((err, record) => {
                     PostDetails.findByIdAndRemove(record.postDetail._id, err => {
-                        if(err) res.send({'message' : '-1'})
+                        if(err) res.status(400).send({
+                            "success": false,
+                            "message": `delete post detail: ${record.postDetail._id} failed`
+                        })
                     });
                 })
         // delele record
         Records.findByIdAndRemove(recordId, err => {
-            if(err) res.send({'message': '-1'});
+            if(err) res.status(400).send({
+                "success": false,
+                "message": `delete record: ${recordId} failed`
+            });
         });
-        res.send(recordId);
+        res.status(200).send({
+            "success": true,
+            "recordId": recordId
+        });
     },
     /** 
      * users view their own orders

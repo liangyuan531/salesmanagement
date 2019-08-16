@@ -5,11 +5,12 @@ import { URL } from './reqURL'
 export const getAllRecords = () => dispatch => {
     axios.get(`${URL}/records/admin`)
         .then(res => {
-            console.log("action: get all records: ", res.data);
-            dispatch({
-                type: GET_ALL_RECORDS,
-                payload: res.data
-            })
+            if(res.data.success === true){
+                dispatch({
+                    type: GET_ALL_RECORDS,
+                    payload: res.data.records
+                })
+            }
         }).catch(err => {
             console.log(err);
         })
@@ -18,11 +19,12 @@ export const getAllRecords = () => dispatch => {
 export const getRecordById = (id) => dispatch => {
     axios.get(`${URL}/record/${id}`)
         .then(res => {
-            console.log("action: get record by id: ", res.data);
-            dispatch({
-                type: GET_RECORD,
-                payload: res.data
-            })
+            if(res.data.success === true){
+                dispatch({
+                    type: GET_RECORD,
+                    payload: res.data.record
+                })
+            }
         }).catch(err => {
             console.log(err);
         })
@@ -33,10 +35,12 @@ export const addRecord = (record) => dispatch => {
     axios.post(`${URL}/records/add`, record)
         .then(res=>{
             console.log("action: add record res: ", res);
-            dispatch({
-                type: ADD_RECORDS,
-                payload: res.data
-            })
+            if(res.data.success === true){
+                dispatch({
+                    type: ADD_RECORDS,
+                    payload: res.data.record
+                })
+            }
         }).catch(err => {
             console.log(err);
         })
@@ -47,10 +51,10 @@ export const deleteRecord = (id) => dispatch => {
     axios.delete(`${URL}/records/${id}`)
         .then(res=>{
             console.log('action delete res data: ', res.data);
-            if(!res.data.hasOwnProperty('message')){
+            if(res.data.success === true){
                 dispatch({
                     type: DELETE_RECORDS,
-                    payload: res.data
+                    payload: res.data.recordId
                 })
             }
         }).catch(err=>{
@@ -61,15 +65,31 @@ export const deleteRecord = (id) => dispatch => {
 export const updatePost = (recordId, post) => dispatch =>{
     axios.put(`${URL}/records/update/postDetail/${recordId}`, post)
         .then(res=>{
-            if(!res.data.message){
-                alert('Update successfully');
-                dispatch({
-                    type: UPDATE_POST,
-                    payload: res.data
-                })
+            console.log("action update data: ", res.data);
+            
+            if(res.data.success === true){
+                alert('Update post details successfully');
+                // dispatch({
+                //     type: UPDATE_POST,
+                //     payload: res.data
+                // })
             }else{
                 alert('Update failed');
             }
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+}
+
+export const updateItems = (recordId, post) => dispatch =>{
+    axios.put(`${URL}/records/update/items/${recordId}`, post)
+        .then(res=>{
+            if(res.data.success === true){
+                alert('Update items successfully');
+            }else{
+                alert('Update failed');
+            }   
         })
         .catch(err=>{
             console.log(err);
