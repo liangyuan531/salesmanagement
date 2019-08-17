@@ -2,5 +2,12 @@
     td {
         border: none;
     }
+    th {
+        border-top: 2px solid #dee2e6;
+        border-bottom: 2px solid #dee2e6;
+    }
+    .record {
+        border-bottom: 2px solid #dee2e6;
+    }
     table-layout: fixed;
 }

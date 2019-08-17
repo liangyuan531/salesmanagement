@@ -76,7 +76,7 @@ class RecordsTable extends React.Component {
                     {records ? 
                     (<React.Fragment>
                         {records.map(record => (
-                            <tr key={record._id}>
+                            <tr key={record._id} className="record">
                                 <td>{this.dateFormat(record.date)}</td>
                                 <td>{record.user.username}</td>
                                 <td>{record.user.isVip ? 'Yes' : 'No'}</td>
