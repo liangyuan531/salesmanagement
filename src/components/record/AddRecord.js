@@ -40,25 +40,25 @@ class AddRecord extends React.Component {
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">User</label>
                     <div className="col-sm-10">
-                      <input type="text" name="username" className="form-control" id="user" placeholder="User name" />
+                      <input type="text" name="username" className="form-control" id="user" placeholder="User name" required/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">Receiver</label>
                     <div className="col-sm-10">
-                      <input type="text" name="receiver" className="form-control" id="receiver" placeholder="Receiver name" />
+                      <input type="text" name="receiver" className="form-control" id="receiver" placeholder="Receiver name" required/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">Phone Number</label>
                     <div className="col-sm-10">
-                      <input type="text" name="phone" className="form-control" id="phone" placeholder="Phone Number" />
+                      <input type="text" name="phone" className="form-control" id="phone" placeholder="Phone Number" required/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-2 col-form-label">Address</label>
                     <div className="col-sm-10">
-                      <input type="text" name="address" className="form-control" id="address" placeholder="Address" />
+                      <input type="text" name="address" className="form-control" id="address" placeholder="Address" required/>
                     </div>
                   </div>
                   <div className="form-group">

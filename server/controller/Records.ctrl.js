@@ -4,8 +4,6 @@ const PostDetails = require('../models/PostDetails')
 const Item = require('../models/Item')
 const validateInput = require('../validation/order.validation')
 
-
-
 module.exports = {
     getAllRecords: (req, res) => {
         Records.find()
@@ -106,27 +104,29 @@ module.exports = {
                     username: record.username,
                     isVip: record.isVip
                 }).save((err, user) => {
-                    if(err) res.status(400).send({
-                        "success": false,
-                        "message": 'cannot create user'
-                    });
+                    // if(err) res.status(400).send({
+                    //     "success": false,
+                    //     "message": 'cannot create user'
+                    // });
                     crateNewRecords(user, record);
+                }).catch(err=>{
+                    console.log("create user error");
                 });
             }
         })
 
-        function crateNewRecords(user, record) {
+        function crateNewRecords(user, record, next) {
             const postDetail = new PostDetails({
                 receiver: record.receiver,
                 phoneNo: record.phone,
                 address: record.address
             })
-            postDetail.save();
+            postDetail.save().then(()=>next()).catch(err=>console.log(err));
     
             const newRecord = new Records({
                 date: new Date()
             })
-            newRecord.save();
+            newRecord.save().then(()=>next()).catch(err=>console.log(err));
             // add purchased items to post detail
             for(let i=0;i<record.items.length;i++){
                 const item = new Item({
@@ -135,7 +135,7 @@ module.exports = {
                     salePrice: record.items[i].salePrice,
                     amount: record.items[i].amount,
                 })
-                item.save();
+                item.save().then(()=>next()).catch(err=>console.log(err));
                 console.log('item saved');
                 postDetail.addItem(item._id);
                 // add items to record

@@ -3,8 +3,7 @@ const isEmpty = require('./isEmpty')
 
 /**
  * order input fields:
- *  - buyer's name,
- *  - item
+ *  - buyer's name
  *  - sales price
  *  - purchase price (not compulsory)
  *  - amount
@@ -14,7 +13,6 @@ const isEmpty = require('./isEmpty')
 module.exports = function validateOrderInput(data) {
     let orderErr = {};
     data.username = !isEmpty(data.username) ? data.username : '';
-    data.item = !isEmpty(data.item) ? data.item : '';
     data.purchasePrice = !isEmpty(data.purchasePrice) ? data.purchasePrice : '';
     data.amount = !isEmpty(data.amount) ? data.amount : '';
     data.phoneNo = !isEmpty(data.phoneNo) ? data.phoneNo : '';
@@ -24,16 +22,12 @@ module.exports = function validateOrderInput(data) {
         orderErr.username = `Buyer's name is required`;
     }
 
-    if(Validator.isEmpty(data.item)) {
-        orderErr.item = `Item's name is required`;
-    }
-
     if(Validator.isEmpty(data.purchasePrice)) {
         orderErr.purchasePrice = 'Purchase price is required';
     }
 
     if(Validator.isEmpty(data.amount)) {
-        orderErr.amount = 'Purchase price  is required';
+        orderErr.amount = 'Purchase price is required';
     }
 
     if(Validator.isEmpty(data.phoneNo)) {
