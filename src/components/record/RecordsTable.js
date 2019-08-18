@@ -56,7 +56,7 @@ class RecordsTable extends React.Component {
                   {/* <button type="button" className="btn btn-danger">Delete</button> */}
                   <button type="button" className="btn btn-primary" onClick={this.addRecord}>Add</button>
                 </div>
-                <table className="table">
+                <table className="table table-sm">
                   <thead>
                       <tr>
                         <th scope="col">Date</th>

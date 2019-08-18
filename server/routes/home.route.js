@@ -1,7 +1,7 @@
-const homeController = require('../controller/Home.ctrl')
+const salesController = require('../controller/Sales.ctrl')
 
 module.exports = (router) => {
-    router.route('/all').get(homeController.getTotal)
-    router.route('/weekly/:year').get(homeController.getWeeklyTotal)
-    router.route('/monthly/:year').get(homeController.getMonthlyTotal)
+    router.route('/all').get(salesController.getTotal)
+    router.route('/weekly/:year').get(salesController.getWeeklyTotal)
+    router.route('/monthly/:year').get(salesController.getMonthlyTotal)
 }

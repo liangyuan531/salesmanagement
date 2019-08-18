@@ -21,6 +21,8 @@
     "concurrently": "^3.6.0",
     "connect-multiparty": "^2.2.0",
     "cors": "^2.8.5",
+    "echarts": "^4.2.1",
+    "echarts-for-react": "^2.0.15-beta.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",

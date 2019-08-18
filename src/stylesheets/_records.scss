@@ -11,3 +11,25 @@
     }
     table-layout: fixed;
 }
+
+%shared-marginTop {
+    margin-top: 10mm;
+}
+.records-table {
+    @extend %shared-marginTop;
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+.add-record {
+    @extend %shared-marginTop;
+} 
+.update-record {
+    @extend %shared-marginTop;
+}
+
+#addItemBtn {
+    margin: {
+        top: 1em;
+    }
+}

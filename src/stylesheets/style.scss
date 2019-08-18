@@ -1,5 +1,6 @@
 @import 'nav';
 @import 'records';
+@import 'home';
 
 .container-fluid {
     width: 100%;
@@ -28,25 +29,6 @@ main {
 
 .flex-column {
     flex-direction: column !important;
-}
-
-%shared-marginTop {
-    margin-top: 10mm;
-}
-.records-table {
-    @extend %shared-marginTop;
-}
-.add-record {
-    @extend %shared-marginTop;
-} 
-.update-record {
-    @extend %shared-marginTop;
-}
-
-#addItemBtn {
-    margin: {
-        top: 1em;
-    }
 }
 
 .form-row {
