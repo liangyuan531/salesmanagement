@@ -18,46 +18,64 @@ module.exports = {
                 });
     },
     getWeeklyTotal: (req, res) => {
-
+        let year = req.params.year;
+        // store records based on month
+        getMonthlyOrWeeklyTotal(year, 'weekly', res);  
     },
     getMonthlyTotal: (req, res) =>{
-        let myear = req.params.year;
+        let year = req.params.year;
         // store records based on month
-        let months = new Array(12);
-        Records.find({
-            "$expr": {                         
-                "$eq": [{"$year": "$date"}, parseInt(myear)] // $date: date field in document
-            }})
-            .populate('items')
-            .exec((err, records) => {
-                if(err) res.status(400).send({
-                    "succsss": false,
-                    "message": "cannot find records"
-                });
-                // classify records by month
-                records.map(record=>{
-                    let month = moment(record.date).month();
-                    // each month can store multiple records
-                    if(months[month] === undefined){
-                        months[month] = new Array();
-                    }
-                    months[month].push(record);
-                })
-                let data = [];
-                for(let recordsByMonth of months) {
-                    // record exist, store 
-                    if(recordsByMonth !== undefined){
-                        data.push(computeTotal(recordsByMonth));
-                    }else{
-                        data.push(null);
-                    }
-                }
-                res.status(200).send({
-                    "success": true,
-                    "data": data
-                });
-            });
+        getMonthlyOrWeeklyTotal(year, 'monthly', res);  
     }
+}
+
+getMonthlyOrWeeklyTotal = (year, unit, res) => {
+    let periods = null;
+    if(unit === 'monthly'){
+        periods = new Array(12);
+    }else if(unit === 'weekly'){
+        periods = [];
+    }else {
+        return 0;
+    }
+    let data = [];
+    Records.find({
+        "$expr": {                         
+            "$eq": [{"$year": "$date"}, parseInt(year)] // $date: date field in document
+        }})
+        .populate('items')
+        .exec((err, records) => {
+            if(err) {
+                res.status(400).send({
+                    "success": false,
+                    "message": "cannot find records"
+                })
+            }
+            // classify records by month
+            records.map(record=>{
+                let period = null;
+                if(unit === 'monthly') period = moment(record.date).month();
+                if(unit === 'weekly') period = moment(record.date).week();
+                // each month can store multiple records
+                if(periods[period] === undefined){
+                    periods[period] = new Array();
+                }
+                periods[period].push(record);
+            })
+            
+            for(let recordsByPeriod of periods) {
+                // record exist, store 
+                if(recordsByPeriod !== undefined){
+                    data.push(computeTotal(recordsByPeriod));
+                }else{
+                    data.push(null);
+                }
+            }
+            res.status(200).send({
+                "success": true,
+                "data": data
+            });
+        });
 }
 
 // compute total of records
