@@ -29,8 +29,36 @@ class AddRecord extends React.Component {
       e.preventDefault();
       const data = new FormData(e.target);
       const records = [...data.entries()];
-      this.props.addRecord(records);
+      let record = this.constructInput(records);
+      let result = this.props.addRecord(record);
+      result.then(res=>{
+        console.log("add...", res);
+        if(res.success === true) {
+          alert("add record successfully");
+        }
+      })
       this.props.history.push('/records');
+    }
+
+    constructInput = (records) => {
+      let record = {};
+      // process input data, extract data except items
+      for(let i=0;i<5;i++) {
+          record[records[i][0]] = records[i][1];
+      }
+      let items = [];
+      let item = {};
+      // process items, add them into an array
+      for(let i=5;i<records.length;i++) {
+          item[records[i][0]] = records[i][1];
+          if(records[i][0] === 'amount'){
+              items.push(item);
+              item = {}
+          }
+      }
+      // add items to record
+      record['items'] = items;
+      return record;
     }
     
     render() {

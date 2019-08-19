@@ -31,7 +31,6 @@ module.exports = {
                 .populate('items')
                 .populate('postDetail')
                 .exec((err, record) => {
-                    console.log("find record by id: ", record);
                     if(err) {
                         res.status(400).send({
                             "succsss": false,
@@ -69,24 +68,8 @@ module.exports = {
             2. post details (receiver, phone number, address)
             3. record's items (itemName, salePrice, purchasePrice, amount)
         */
-        let data = req.body;
-        let record = {};
-        // process input data, extract data except items
-        for(let i=0;i<5;i++) {
-            record[data[i][0]] = data[i][1];
-        }
-        let items = [];
-        let item = {};
-        // process items, add them into an array
-        for(let i=5;i<data.length;i++) {
-            item[data[i][0]] = data[i][1];
-            if(data[i][0] === 'amount'){
-                items.push(item);
-                item = {}
-            }
-        }
-        // add items to record
-        record['items'] = items;
+        let record = req.body;
+        console.log("data: ", record);
         /* validate input */
         //let {orderErr, isValid} = validateOrderInput(record);
         // if validation not passing, return error

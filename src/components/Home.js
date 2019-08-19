@@ -3,10 +3,6 @@ import { connect } from 'react-redux'
 import { getTotalSales } from '../redux/actions/homeAction'
 
 import ReactEcharts from 'echarts-for-react'
-import echarts from 'echarts/lib/echarts'
-import 'echarts/lib/chart/pie'
-import 'echarts/lib/component/tooltip'
-import 'echarts/lib/component/title'
 
 class Home extends React.Component {
     constructor(props) {

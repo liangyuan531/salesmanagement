@@ -32,7 +32,13 @@ class UpdateRecordPostDetails extends React.Component {
           postId: this._postId.current.value
         }
         //console.log(`post2: ${post}`);
-        this.props.updatePost(this.props.recordId, post);
+        let result = this.props.updatePost(this.props.recordId, post);
+        result.then(res=>{
+          console.log("update items: ", res);
+          if(res.success === true) {
+            alert("update record items successfully");
+          }
+        })
         this.props.history.push('records');
     }
     handleInputChange = (e) => {

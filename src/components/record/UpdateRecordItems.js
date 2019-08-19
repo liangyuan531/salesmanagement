@@ -33,14 +33,16 @@ class UpdateRecordItems extends React.Component {
         e.preventDefault();
         const data = new FormData(e.target);
         const items = [...data.entries()];
-        this.props.updateItems(this.props.recordId, items);
+        let result = this.props.updateItems(this.props.recordId, items);
+        result.then(res=>{
+          console.log("update items: ", res);
+          if(res.success === true) {
+            alert("update record items successfully");
+          }
+        })
+        this.props.history.push('records');
     }
 
-    handleInputChange = (e) => {
-        this.setState({
-          
-        })
-    }
     render() {
         let items = this.props.record.items;
         return(

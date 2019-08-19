@@ -35,7 +35,12 @@ class RecordsTable extends React.Component {
     }
 
     deleteRecord = (id) => {
-        this.props.deleteRecord(id);
+        let result = this.props.deleteRecord(id);
+        result.then(res=>{
+            console.log("res: ", res)
+            if(res.success === true)
+            alert("delete successfully");  
+        });     
     }
 
     computeTotal = (records) => {

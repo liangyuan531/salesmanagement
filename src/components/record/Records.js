@@ -9,7 +9,6 @@ class Records extends React.Component {
         this.props.getAllRecords();
     }
     
-    
     render() {
         const records = this.props.records;
         console.log("records ", records);

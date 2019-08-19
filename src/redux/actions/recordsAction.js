@@ -32,7 +32,7 @@ export const getRecordById = (id) => dispatch => {
 
 export const addRecord = (record) => dispatch => {
     console.log('adding record: ', record);
-    axios.post(`${URL}/records/add`, record)
+    return axios.post(`${URL}/records/add`, record)
         .then(res=>{
             console.log("action: add record res: ", res);
             if(res.data.success === true){
@@ -40,7 +40,8 @@ export const addRecord = (record) => dispatch => {
                     type: ADD_RECORDS,
                     payload: res.data.record
                 })
-                alert('add record successfully');
+                //alert('add record successfully');
+                return res.data;
             }
         }).catch(err => {
             console.log(err);
@@ -49,7 +50,7 @@ export const addRecord = (record) => dispatch => {
 
 export const deleteRecord = (id) => dispatch => {
     console.log('delete record id: ', id);
-    axios.delete(`${URL}/records/${id}`)
+    return axios.delete(`${URL}/records/${id}`)
         .then(res=>{
             console.log('action delete res data: ', res.data);
             if(res.data.success === true){
@@ -57,6 +58,7 @@ export const deleteRecord = (id) => dispatch => {
                     type: DELETE_RECORDS,
                     payload: res.data.recordId
                 })
+                return res.data
             }
         }).catch(err=>{
             console.log(err);
@@ -64,19 +66,19 @@ export const deleteRecord = (id) => dispatch => {
 }
 
 export const updatePost = (recordId, post) => dispatch =>{
-    axios.put(`${URL}/records/update/postDetail/${recordId}`, post)
+    return axios.put(`${URL}/records/update/postDetail/${recordId}`, post)
         .then(res=>{
             console.log("action update data: ", res.data);
-            
-            if(res.data.success === true){
-                alert('Update post details successfully');
-                // dispatch({
-                //     type: UPDATE_POST,
-                //     payload: res.data
-                // })
-            }else{
-                alert('Update failed');
-            }
+            return res.data;
+            // if(res.data.success === true){
+            //     alert('Update post details successfully');
+            //     // dispatch({
+            //     //     type: UPDATE_POST,
+            //     //     payload: res.data
+            //     // })
+            // }else{
+            //     alert('Update failed');
+            // }
         })
         .catch(err=>{
             console.log(err);
@@ -84,13 +86,14 @@ export const updatePost = (recordId, post) => dispatch =>{
 }
 
 export const updateItems = (recordId, post) => dispatch =>{
-    axios.put(`${URL}/records/update/items/${recordId}`, post)
+    return axios.put(`${URL}/records/update/items/${recordId}`, post)
         .then(res=>{
-            if(res.data.success === true){
-                alert('Update items successfully');
-            }else{
-                alert('Update failed');
-            }   
+            return res.data
+            // if(res.data.success === true){
+            //     alert('Update items successfully');
+            // }else{
+            //     alert('Update failed');
+            // }   
         })
         .catch(err=>{
             console.log(err);
