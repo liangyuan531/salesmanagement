@@ -4,12 +4,15 @@ import { connect } from 'react-redux'
 import { getAllRecords } from '../../redux/actions/recordsAction'
 
 class Records extends React.Component {
-    componentDidMount() {
+    constructor(props) {
+        super(props);
         this.props.getAllRecords();
     }
     
+    
     render() {
-        const records = this.props.records.records;
+        const records = this.props.records;
+        console.log("records ", records);
         return(
             <div className="records-table">
                 <RecordsTable records={records}/>
@@ -19,7 +22,7 @@ class Records extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    records: state.records
+    records: state.records.records
 })
 
 

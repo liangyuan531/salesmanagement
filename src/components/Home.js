@@ -16,24 +16,8 @@ class Home extends React.Component {
             total: this.props.total
         }
     }
-    componentDidMount() {
-        //this.setState({total: this.props.total})
-        // var chart = echarts.init(document.getElementById('main'));
-        // chart.setOption({
-        //     title: {text: 'Total Sales/Cost'},
-        //     tooltip: {},
-        //     xAxis: {
-        //         data: ["Sales", "Costs"]
-        //     },
-        //     yAxis: {},
-        //     series: [{
-        //         name: 'sales',
-        //         type: 'pie',
-        //         data: ['100', this.state.total.totalCost]
-        //     }]
-        // })
-    }
-    getOption = () => {
+    
+    getOptionOfTotal = () => {
         const option = {
             title: {text: 'Total Sales/Cost'},
             tooltip: {},
@@ -56,7 +40,7 @@ class Home extends React.Component {
     render() {
         return(
             <div className="home">
-                <ReactEcharts option={this.getOption()} lazyUpdate={true}/>
+                <ReactEcharts option={this.getOptionOfTotal()} lazyUpdate={true}/>
             </div>
             
         )

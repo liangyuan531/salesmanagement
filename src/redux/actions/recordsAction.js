@@ -40,6 +40,7 @@ export const addRecord = (record) => dispatch => {
                     type: ADD_RECORDS,
                     payload: res.data.record
                 })
+                alert('add record successfully');
             }
         }).catch(err => {
             console.log(err);

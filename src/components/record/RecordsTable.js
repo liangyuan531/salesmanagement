@@ -7,10 +7,15 @@ class RecordsTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            toAddPage: false
+            toAddPage: false,
+            records: this.props.records            
         }
     }
-
+    componentDidUpdate(prevProps) {
+        if(this.props.records !== prevProps.records) {
+            this.setState({records: this.props.records})
+        }
+    }
     addRecord = () => {
         this.setState({
             toAddPage: true
@@ -45,7 +50,7 @@ class RecordsTable extends React.Component {
         return total;
     }
     render() {
-        const records = this.props.records;
+        const records = this.state.records;
         if(this.state.toAddPage === true) {
             return <Redirect to='/addRecord' />
         }

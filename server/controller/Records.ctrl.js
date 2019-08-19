@@ -11,10 +11,13 @@ module.exports = {
                 .populate('items')
                 .populate('postDetail')
                 .exec((err, records) => {
-                    if(err) res.status(400).send({
-                        "succsss": false,
-                        "message": `cannot find record with id: ${recordId}`
-                    });
+                    if(err) {
+                        res.status(400).send({
+                            "succsss": false,
+                            "message": `cannot find record with id: ${recordId}`
+                        });
+                        return 0;
+                    }
                     res.status(200).send({
                         "success": true,
                         "records": records
@@ -29,10 +32,13 @@ module.exports = {
                 .populate('postDetail')
                 .exec((err, record) => {
                     console.log("find record by id: ", record);
-                    if(err) res.status(400).send({
-                        "succsss": false,
-                        "message": `cannot find record with id: ${recordId}`
-                    });
+                    if(err) {
+                        res.status(400).send({
+                            "succsss": false,
+                            "message": `cannot find record with id: ${recordId}`
+                        });
+                        return 0;
+                    }
                     res.status(200).send({
                         "success": true,
                         "record": record
@@ -104,54 +110,68 @@ module.exports = {
                     username: record.username,
                     isVip: record.isVip
                 }).save((err, user) => {
-                    // if(err) res.status(400).send({
-                    //     "success": false,
-                    //     "message": 'cannot create user'
-                    // });
+                    if(err) {
+                        res.status(400).send({
+                            "success": false,
+                            "message": 'cannot create user'
+                        });
+                        return 0;
+                    }
                     crateNewRecords(user, record);
-                }).catch(err=>{
-                    console.log("create user error");
                 });
             }
         })
 
-        function crateNewRecords(user, record, next) {
-            const postDetail = new PostDetails({
-                receiver: record.receiver,
-                phoneNo: record.phone,
-                address: record.address
-            })
-            postDetail.save().then(()=>next()).catch(err=>console.log(err));
-    
-            const newRecord = new Records({
+        function crateNewRecords(user, record) {
+            new Records({
                 date: new Date()
-            })
-            newRecord.save().then(()=>next()).catch(err=>console.log(err));
-            // add purchased items to post detail
-            for(let i=0;i<record.items.length;i++){
-                const item = new Item({
-                    itemName: record.items[i].itemName,
-                    purchasePrice: record.items[i].purchasePrice,
-                    salePrice: record.items[i].salePrice,
-                    amount: record.items[i].amount,
+            }).save((err, newRecord) => {
+                if(err) {
+                    res.status(400).send({
+                        "success": false,
+                        "record": "cannot create record"
+                    });
+                    return 0;
+                }
+                new PostDetails({
+                    receiver: record.receiver,
+                    phoneNo: record.phone,
+                    address: record.address
+                }).save((err, postDetail) => {
+                    if(err) {
+                        res.status(400).send({
+                            "success": false,
+                            "record": "cannot create post details"
+                        });
+                        return 0;
+                    }
+                    // add purchased items to post detail
+                    for(let i=0;i<record.items.length;i++){
+                        const item = new Item({
+                            itemName: record.items[i].itemName,
+                            purchasePrice: record.items[i].purchasePrice,
+                            salePrice: record.items[i].salePrice,
+                            amount: record.items[i].amount,
+                        })
+                        item.save();
+                        console.log('item saved');
+                        postDetail.addItem(item._id);
+                        // add items to record
+                        newRecord.addItem(item._id);
+                    }
+                    user.addPostDetails(postDetail._id);
+                    // add user to record
+                    newRecord.applyUser(user._id);
+                    // record add postdetails
+                    newRecord.addPostDetail(postDetail._id)
+                    console.log('record: ', newRecord);
+                    res.status(200).send({
+                        "success": true,
+                        "record": newRecord
+                    });
                 })
-                item.save().then(()=>next()).catch(err=>console.log(err));
-                console.log('item saved');
-                postDetail.addItem(item._id);
-                // add items to record
-                newRecord.addItem(item._id);
-            }
-            user.addPostDetails(postDetail._id);
-            // add user to record
-            newRecord.applyUser(user._id);
-            // record add postdetails
-            newRecord.addPostDetail(postDetail._id)
-            console.log('record: ', newRecord);
-            return res.status(200).send({
-                "success": true,
-                "record": newRecord
-            });
-        }
+            })
+        }   
     },
 
     updateRecordItems: (req, res) => {
@@ -234,24 +254,26 @@ module.exports = {
         // delete post details
         Records.findById(recordId)
                 .exec((err, record) => {
+                    console.log("record: ",record);
+                    
                     PostDetails.findByIdAndRemove(record.postDetail._id, err => {
                         if(err) res.status(400).send({
                             "success": false,
                             "message": `delete post detail: ${record.postDetail._id} failed`
                         })
                     });
+                    // delele record
+                    Records.findByIdAndRemove(recordId, err => {
+                        if(err) res.status(400).send({
+                            "success": false,
+                            "message": `delete record: ${recordId} failed`
+                        });
+                        res.status(200).send({
+                            "success": true,
+                            "recordId": recordId
+                        });
+                    });
                 })
-        // delele record
-        Records.findByIdAndRemove(recordId, err => {
-            if(err) res.status(400).send({
-                "success": false,
-                "message": `delete record: ${recordId} failed`
-            });
-        });
-        res.status(200).send({
-            "success": true,
-            "recordId": recordId
-        });
     },
     /** 
      * users view their own orders
