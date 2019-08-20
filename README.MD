@@ -1,4 +1,6 @@
 React as client and node.js as server.
+# install dependencies
+npm install
 
 # run project
  npm run dev
@@ -8,4 +10,4 @@ React as client and node.js as server.
 
 
 
-https://medium.com/@everdimension/how-to-handle-forms-with-just-react-ac066c48bd4f
+
