@@ -35,9 +35,10 @@ class AddRecord extends React.Component {
         console.log("add...", res);
         if(res.success === true) {
           alert("add record successfully");
+          this.props.history.push('/records');
         }
       })
-      this.props.history.push('/records');
+      
     }
 
     constructInput = (records) => {

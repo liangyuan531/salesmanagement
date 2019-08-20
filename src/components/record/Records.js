@@ -8,13 +8,13 @@ class Records extends React.Component {
         super(props);
         this.props.getAllRecords();
     }
-    
+
     render() {
         const records = this.props.records;
         console.log("records ", records);
         return(
             <div className="records-table">
-                <RecordsTable records={records}/>
+                {records.length !== 0 ? <RecordsTable records={records}/> : ''}
             </div>
         )
     }

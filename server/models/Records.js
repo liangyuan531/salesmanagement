@@ -21,8 +21,10 @@ RecordsSchema.methods.applyUser = function(id) {
     return this.save();
 }
 
-RecordsSchema.methods.addItem = function(id) {
-    this.items.push(id);
+RecordsSchema.methods.addItems = function(items) {
+    items.map(item=>{
+        this.items.push(item._id);
+    })
     return this.save();
 }
 

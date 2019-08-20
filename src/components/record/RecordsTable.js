@@ -7,15 +7,10 @@ class RecordsTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            toAddPage: false,
-            records: this.props.records            
+            toAddPage: false
         }
     }
-    componentDidUpdate(prevProps) {
-        if(this.props.records !== prevProps.records) {
-            this.setState({records: this.props.records})
-        }
-    }
+    
     addRecord = () => {
         this.setState({
             toAddPage: true
@@ -25,7 +20,6 @@ class RecordsTable extends React.Component {
     dateFormat = (date) => {
         return date.slice(0,10);
     }
-
 
     updateRecord = (id) => {
         this.props.history.push({
@@ -55,7 +49,7 @@ class RecordsTable extends React.Component {
         return total;
     }
     render() {
-        const records = this.state.records;
+        const records = this.props.records;
         if(this.state.toAddPage === true) {
             return <Redirect to='/addRecord' />
         }
@@ -83,8 +77,6 @@ class RecordsTable extends React.Component {
                       </tr>
                     </thead>
                   <tbody>
-                    {records ? 
-                    (<React.Fragment>
                         {records.map(record => (
                             <tr key={record._id} className="record">
                                 <td>{this.dateFormat(record.date)}</td>
@@ -96,8 +88,8 @@ class RecordsTable extends React.Component {
                                 <td colSpan="4">
                                     <table className="table">
                                         <tbody>
-                                            {record.items.map(item =>(
-                                                <tr key={item._id}>
+                                            {record.items.map((item, index) =>(
+                                                <tr key={index}>
                                                     <td align="left">{item.itemName}</td>
                                                     <td align="left">{item.salePrice}</td>
                                                     <td align="left">{item.amount}</td>
@@ -119,8 +111,6 @@ class RecordsTable extends React.Component {
                           <td>Total</td>
                           <td>${total}</td>
                         </tr>
-                    </React.Fragment>)
-                    : ''}
                     </tbody>
                 </table>
             </>

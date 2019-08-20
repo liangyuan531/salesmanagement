@@ -38,9 +38,9 @@ class UpdateRecordItems extends React.Component {
           console.log("update items: ", res);
           if(res.success === true) {
             alert("update record items successfully");
+            this.props.history.push('records');
           }
         })
-        this.props.history.push('records');
     }
 
     render() {

@@ -69,7 +69,7 @@ module.exports = {
             3. record's items (itemName, salePrice, purchasePrice, amount)
         */
         let record = req.body;
-        console.log("data: ", record);
+        //console.log("data: ", record);
         /* validate input */
         //let {orderErr, isValid} = validateOrderInput(record);
         // if validation not passing, return error
@@ -128,30 +128,35 @@ module.exports = {
                         });
                         return 0;
                     }
-                    // add purchased items to post detail
-                    for(let i=0;i<record.items.length;i++){
-                        const item = new Item({
-                            itemName: record.items[i].itemName,
-                            purchasePrice: record.items[i].purchasePrice,
-                            salePrice: record.items[i].salePrice,
-                            amount: record.items[i].amount,
+                    user.addPostDetails(postDetail._id).then((user)=>{
+                        // add user to record
+                        newRecord.applyUser(user._id).then(newRecord=>{
+                            // record add postdetails
+                            newRecord.addPostDetail(postDetail._id).then(newRecord=>{
+                                // add purchased items to post detail
+                                let itemsTemp = [];
+                                for(let i=0;i<record.items.length;i++){ 
+                                    new Item({
+                                        itemName: record.items[i].itemName,
+                                        purchasePrice: record.items[i].purchasePrice,
+                                        salePrice: record.items[i].salePrice,
+                                        amount: record.items[i].amount,
+                                    }).save((err, item)=>{
+                                        // add items to record
+                                        itemsTemp.push(item); 
+                                        if(itemsTemp.length === record.items.length){
+                                            newRecord.addItems(itemsTemp).then(newRecord=>{
+                                                res.status(200).send({
+                                                    "success": true,
+                                                    "record": newRecord
+                                                });
+                                            })
+                                        }
+                                    });
+                                }     
+                            })
                         })
-                        item.save();
-                        console.log('item saved');
-                        postDetail.addItem(item._id);
-                        // add items to record
-                        newRecord.addItem(item._id);
-                    }
-                    user.addPostDetails(postDetail._id);
-                    // add user to record
-                    newRecord.applyUser(user._id);
-                    // record add postdetails
-                    newRecord.addPostDetail(postDetail._id)
-                    console.log('record: ', newRecord);
-                    res.status(200).send({
-                        "success": true,
-                        "record": newRecord
-                    });
+                    })
                 })
             })
         }   
