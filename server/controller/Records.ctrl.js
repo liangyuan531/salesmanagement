@@ -10,6 +10,7 @@ module.exports = {
                 .populate('user')
                 .populate('items')
                 .populate('postDetail')
+                .sort({date: -1})
                 .exec((err, records) => {
                     if(err) {
                         res.status(400).send({

@@ -7,3 +7,5 @@ export const UPDATE_POST = "UPDATE_POST";
 
 /** home action types */
 export const GET_TOTAL = "GET_TOTAL";
+export const GET_MONTHLY_TOTAL = "GET_MONTHLY_TOTAL";
+export const GET_WEEKLY_TOTAL = "GET_WEEKLY_TOTAL";

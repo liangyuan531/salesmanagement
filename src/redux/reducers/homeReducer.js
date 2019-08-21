@@ -1,7 +1,9 @@
-import { GET_TOTAL } from '../actions/actionType'
+import { GET_TOTAL, GET_MONTHLY_TOTAL, GET_WEEKLY_TOTAL} from '../actions/actionType'
 
 const initialState = {
-    total: {}
+    total: {},
+    monthlyTotal: [],
+    weeklyTotal: []
 }
 
 export default function(state = initialState, action) {
@@ -10,6 +12,16 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 total: action.payload
+            }
+        case GET_MONTHLY_TOTAL:
+            return {
+                ...state,
+                monthlyTotal: action.payload
+            }
+        case GET_WEEKLY_TOTAL:
+            return {
+                ...state,
+                weeklyTotal: action.payload
             }
         default:
             return state;
