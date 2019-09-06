@@ -1,16 +1,14 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Navigator from './components/Navigator'
 import TopBar from './components/TopBar'
-import Home from './components/home/Home'
-import Records from './components/record/Records'
 import Report from './components/report/Report'
 import Error404 from './components/Error'
 import AddRecord from './components/record/AddRecord'
 import UpdateRecord from './components/record/UpdateRecord'
 import UpdateRecordItems from './components/record/UpdateRecordItems'
 import UpdateRecordPostDetails from './components/record/UpdateRecordPostDetails'
-
+import Records from './components/record/Records'
 
 import store from './redux/store'
 import { Provider } from 'react-redux'
@@ -18,11 +16,14 @@ import { Provider } from 'react-redux'
 import './App.scss'
 import './stylesheets/style.scss'
 
+const Home = lazy(() => import('./components/home/Home'))
+
 function App() {
   return (
     // <div className="App">
       <Provider store={store}>
         <Router>
+          <Suspense fallback={<div>loading....</div>}>
           <div>
             <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
               <TopBar />
@@ -47,6 +48,7 @@ function App() {
               </div>
             </div>
           </div>
+          </Suspense>
         </Router>
       </Provider>
     // </div>
